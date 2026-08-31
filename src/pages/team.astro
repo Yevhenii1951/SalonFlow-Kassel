@@ -26,7 +26,13 @@ const booking = getBookingIntegration(salon);
       {
         team.map((member) => (
           <article class="card member">
-            <div class="avatar">{member.name.slice(0, 1)}</div>
+            {
+              member.photo ? (
+                <img class="member-photo" src={member.photo} alt={`${member.name} - ${member.role}`} loading="lazy" />
+              ) : (
+                <div class="avatar">{member.name.slice(0, 1)}</div>
+              )
+            }
             <h2 class="h3">{member.name}</h2>
             <p class="role">{member.role}</p>
             <p>{member.focus}</p>
@@ -66,6 +72,14 @@ const booking = getBookingIntegration(salon);
     color: #1a140b;
     font-size: 1.6rem;
     font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .member-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 6px;
+    object-fit: cover;
     margin-bottom: 18px;
   }
 
