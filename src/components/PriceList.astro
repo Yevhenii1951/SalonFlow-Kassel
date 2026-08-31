@@ -1,0 +1,61 @@
+---
+import { priceGroups } from "../data/salon";
+---
+
+<div class="price-grid">
+  {
+    priceGroups.map((group) => (
+      <section class="card price-card">
+        <h2 class="h3">{group.name}</h2>
+        <ul>
+          {group.items.map(([label, price]) => (
+            <li>
+              <span>{label}</span>
+              <strong>{price}</strong>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</div>
+
+<style>
+  .price-grid {
+    display: grid;
+    gap: 18px;
+  }
+
+  .price-card {
+    padding: 24px;
+  }
+
+  ul {
+    display: grid;
+    gap: 14px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+  }
+
+  li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  span {
+    color: var(--muted);
+  }
+
+  strong {
+    white-space: nowrap;
+  }
+</style>

@@ -1,0 +1,108 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { salon } from "../data/salon";
+---
+
+<BaseLayout
+  title="Kontakt"
+  description="Kontakt, Adresse, Oeffnungszeiten und Terminbuchung fuer den fiktiven SalonFlow Kassel."
+>
+  <section class="section page-hero">
+    <div class="container contact-grid">
+      <div>
+        <p class="eyebrow">Kontakt</p>
+        <h1 class="h1">Termin buchen oder direkt anrufen.</h1>
+        <p class="lead">
+          Kontaktdaten bleiben sichtbar, auch wenn eine Karte wegen Datenschutz
+          erst nach Zustimmung geladen wuerde.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href={salon.bookingUrl}>Termin buchen</a>
+          <a class="btn btn-secondary" href={`tel:${salon.phone.replaceAll(" ", "")}`}>{salon.phone}</a>
+        </div>
+      </div>
+      <aside class="card contact-card">
+        <h2 class="h3">{salon.name}</h2>
+        <p>
+          {salon.address.street}<br />
+          {salon.address.postalCode} {salon.address.city}
+        </p>
+        <p><a href={`mailto:${salon.email}`}>{salon.email}</a></p>
+        <ul>
+          {salon.hours.map(([day, time]) => <li><span>{day}</span><strong>{time}</strong></li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container map-placeholder">
+      <p class="eyebrow">Karte</p>
+      <h2 class="h2">Consent-safe map placeholder.</h2>
+      <p class="lead">
+        In einem echten Projekt wuerde hier eine OpenStreetMap- oder Google-Maps-
+        Einbettung erst nach Zustimmung geladen. Adresse und Telefon bleiben
+        trotzdem indexierbar und nutzbar.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: #f4efe6;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 34px;
+    align-items: start;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .contact-card,
+  .map-placeholder {
+    padding: 28px;
+  }
+
+  .contact-card p,
+  .map-placeholder p {
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  ul {
+    display: grid;
+    gap: 10px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+  }
+
+  .map-placeholder {
+    border: 1px dashed var(--sage);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  @media (max-width: 820px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

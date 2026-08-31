@@ -1,0 +1,85 @@
+---
+import { gallery } from "../data/salon";
+---
+
+<div class="gallery-grid">
+  {
+    gallery.map((item) => (
+      <figure class="gallery-item">
+        <img src={item.image} alt={item.alt} loading="lazy" />
+        <figcaption>
+          <span>{item.category}</span>
+          <strong>{item.title}</strong>
+        </figcaption>
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .gallery-item {
+    position: relative;
+    min-height: 320px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 0;
+    background: #e7e1d6;
+  }
+
+  .gallery-item:first-child {
+    grid-column: span 2;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+    transition: transform 260ms ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.03);
+  }
+
+  figcaption {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    border-radius: 8px;
+    background: rgba(255, 250, 244, 0.84);
+    padding: 12px;
+    backdrop-filter: blur(12px);
+  }
+
+  span {
+    display: block;
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 780;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .gallery-item:first-child {
+      grid-column: auto;
+    }
+  }
+</style>

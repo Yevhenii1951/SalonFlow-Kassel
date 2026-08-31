@@ -1,0 +1,69 @@
+---
+import BookingBand from "../components/BookingBand.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { team } from "../data/salon";
+---
+
+<BaseLayout
+  title="Team"
+  description="Teamseite des fiktiven SalonFlow Kassel mit Rollen, Spezialisierungen und Vertrauensaufbau."
+>
+  <section class="section page-hero">
+    <div class="container">
+      <p class="eyebrow">Team</p>
+      <h1 class="h1">Menschen sichtbar machen, bevor gebucht wird.</h1>
+      <p class="lead">
+        Eine lokale Dienstleistung verkauft Vertrauen. Rollen, Spezialisierungen
+        und Fotos koennen spaeter aus dem CMS kommen.
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container grid-3">
+      {
+        team.map((member) => (
+          <article class="card member">
+            <div class="avatar">{member.name.slice(0, 1)}</div>
+            <h2 class="h3">{member.name}</h2>
+            <p class="role">{member.role}</p>
+            <p>{member.focus}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+  <BookingBand />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: #f4efe6;
+  }
+
+  .member {
+    padding: 24px;
+  }
+
+  .avatar {
+    display: grid;
+    width: 74px;
+    height: 74px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--sage);
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 820;
+    margin-bottom: 18px;
+  }
+
+  .role {
+    color: var(--accent);
+    font-weight: 760;
+  }
+
+  p {
+    color: var(--muted);
+    line-height: 1.6;
+  }
+</style>

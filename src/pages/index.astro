@@ -1,0 +1,130 @@
+---
+import BookingBand from "../components/BookingBand.astro";
+import GalleryGrid from "../components/GalleryGrid.astro";
+import Hero from "../components/Hero.astro";
+import ServiceGrid from "../components/ServiceGrid.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { salon, testimonials } from "../data/salon";
+---
+
+<BaseLayout
+  title="Friseur Kassel"
+  description="Fiktiver moderner Friseursalon in Kassel mit Balayage, Schnitt, Styling, Online-Termin und lokaler SEO-Struktur."
+>
+  <Hero />
+
+  <section class="section">
+    <div class="container intro-grid">
+      <div>
+        <p class="eyebrow">Leistungen</p>
+        <h2 class="h2">Schnell verstehen, ob der Salon passt.</h2>
+      </div>
+      <p class="lead">
+        Die Startseite priorisiert echte lokale Conversion: sichtbarer Terminbutton,
+        klare Leistungsbereiche, Preisniveau, Vertrauen und Kontakt ohne Umwege.
+      </p>
+    </div>
+    <div class="container section-tight">
+      <ServiceGrid featuredOnly />
+    </div>
+  </section>
+
+  <section class="section proof-section">
+    <div class="container proof-grid">
+      <div>
+        <p class="eyebrow">Warum diese Struktur</p>
+        <h2 class="h2">Gebaut wie ein Kundenprojekt, aber ohne echte Kundendaten.</h2>
+      </div>
+      <div class="proof-list">
+        <article><strong>Mobile zuerst</strong><span>Booking und Telefon sind sofort erreichbar.</span></article>
+        <article><strong>CMS-ready</strong><span>Services, Preise, Galerie, Team und FAQ liegen als strukturierte Daten vor.</span></article>
+        <article><strong>Deutschland-ready</strong><span>Impressum, Datenschutz, lokale Keywords und Kontaktinformationen sind eingeplant.</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container intro-grid">
+      <div>
+        <p class="eyebrow">Galerie</p>
+        <h2 class="h2">Visuelle Qualitaet vor langen Texten.</h2>
+      </div>
+      <p class="lead">
+        Fuer echte Salons waeren hier eigene Vorher/Nachher-Bilder wichtig. In diesem
+        Lernprojekt nutzen wir neutrale Platzhalterbilder.
+      </p>
+    </div>
+    <div class="container section-tight">
+      <GalleryGrid />
+    </div>
+  </section>
+
+  <section class="section testimonial-section">
+    <div class="container">
+      <p class="eyebrow">Vertrauen</p>
+      <h2 class="h2">Kurze Signale statt leerer Werbetexte.</h2>
+      <div class="grid-3 testimonial-grid">
+        {testimonials.map((text) => <blockquote class="card">"{text}"</blockquote>)}
+      </div>
+    </div>
+  </section>
+
+  <BookingBand
+    title={`Termin bei ${salon.name} buchen`}
+    text="Der wichtigste Button bleibt ueber die ganze Website hinweg sichtbar und fuehrt in Phase 1 zu einem externen Booking-Link."
+  />
+</BaseLayout>
+
+<style>
+  .intro-grid,
+  .proof-grid {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  .proof-section {
+    background: #f4efe6;
+  }
+
+  .proof-list {
+    display: grid;
+    gap: 14px;
+  }
+
+  .proof-list article {
+    display: grid;
+    gap: 6px;
+    border-left: 4px solid var(--sage);
+    background: rgba(255, 255, 255, 0.58);
+    padding: 18px;
+  }
+
+  .proof-list span,
+  blockquote {
+    color: var(--muted);
+  }
+
+  .testimonial-section {
+    background: #fff;
+  }
+
+  .testimonial-grid {
+    margin-top: 28px;
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 24px;
+    font-size: 1.08rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .intro-grid,
+    .proof-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

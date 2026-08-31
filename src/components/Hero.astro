@@ -1,0 +1,112 @@
+---
+import { salon } from "../data/salon";
+---
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Friseur in Kassel Mitte</p>
+      <h1 class="h1">Modernes Haarstudio fuer Farbe und Schnitt.</h1>
+      <p class="lead">
+        {salon.name} ist ein fiktives Portfolio-Projekt fuer einen lokalen Salon:
+        schnelle Buchung, klare Leistungen und starke lokale Auffindbarkeit.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={salon.bookingUrl}>Termin buchen</a>
+        <a class="btn btn-secondary" href="/leistungen/">Leistungen ansehen</a>
+      </div>
+    </div>
+    <figure class="hero-media">
+      <img
+        src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1400&q=82"
+        alt="Heller moderner Friseursalon mit Spiegeln und Stylingstuehlen"
+        loading="eager"
+      />
+      <figcaption>
+        <strong>Heute freie Beratungsslots</strong>
+        <span>Balayage, Schnitt, Styling</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: calc(100vh - 74px);
+    padding: 48px 0 62px;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
+    gap: 34px;
+    align-items: center;
+  }
+
+  .hero-copy {
+    padding: 34px 0;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .hero-media {
+    position: relative;
+    min-height: 620px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 0;
+    background: #e7e1d6;
+  }
+
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    min-height: 620px;
+    object-fit: cover;
+  }
+
+  figcaption {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    left: 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    border-radius: 8px;
+    background: rgba(255, 250, 244, 0.82);
+    padding: 16px;
+    backdrop-filter: blur(16px);
+  }
+
+  figcaption span {
+    color: var(--muted);
+  }
+
+  @media (max-width: 920px) {
+    .hero {
+      min-height: auto;
+    }
+
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-media,
+    .hero-media img {
+      min-height: 430px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    figcaption {
+      display: block;
+    }
+  }
+</style>

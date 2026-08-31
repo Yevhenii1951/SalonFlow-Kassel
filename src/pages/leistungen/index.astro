@@ -1,0 +1,33 @@
+---
+import BookingBand from "../../components/BookingBand.astro";
+import ServiceGrid from "../../components/ServiceGrid.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Leistungen"
+  description="Leistungen des fiktiven SalonFlow Kassel: Balayage, Schnitt, Coloration, Pflege und Brautstyling."
+>
+  <section class="section page-hero">
+    <div class="container">
+      <p class="eyebrow">Leistungen</p>
+      <h1 class="h1">Alles, was ein lokaler Salon klar verkaufen muss.</h1>
+      <p class="lead">
+        Jede Leistung ist als strukturierter Datensatz angelegt. Spaeter kann daraus
+        eine CMS Collection in Sanity, Storyblok, Decap CMS oder Directus werden.
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <ServiceGrid />
+    </div>
+  </section>
+  <BookingBand />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: #f4efe6;
+  }
+</style>

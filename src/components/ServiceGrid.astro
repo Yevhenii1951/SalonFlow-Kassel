@@ -1,0 +1,65 @@
+---
+import { services } from "../data/salon";
+
+interface Props {
+  featuredOnly?: boolean;
+}
+
+const { featuredOnly = false } = Astro.props;
+const visibleServices = featuredOnly ? services.filter((service) => service.featured) : services;
+---
+
+<div class="grid-3 service-grid">
+  {
+    visibleServices.map((service) => (
+      <article class="card service-card">
+        <div>
+          <p class="service-meta">{service.duration}</p>
+          <h3 class="h3">{service.title}</h3>
+          <p>{service.summary}</p>
+        </div>
+        <div class="service-footer">
+          <strong>{service.price}</strong>
+          <a href={`/leistungen/${service.slug}/`}>Details</a>
+        </div>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .service-card {
+    display: flex;
+    min-height: 260px;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+  }
+
+  .service-card p {
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .service-meta {
+    margin: 0 0 18px;
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 780;
+  }
+
+  .service-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+  }
+
+  .service-footer a {
+    color: var(--accent);
+    font-weight: 760;
+    text-decoration: none;
+  }
+</style>

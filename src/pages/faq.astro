@@ -1,0 +1,50 @@
+---
+import BookingBand from "../components/BookingBand.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { faqs } from "../data/salon";
+---
+
+<BaseLayout
+  title="FAQ"
+  description="Haeufige Fragen zu Terminbuchung, Preisen und Projektstatus von SalonFlow Kassel."
+>
+  <section class="section page-hero">
+    <div class="container">
+      <p class="eyebrow">FAQ</p>
+      <h1 class="h1">Fragen, die vor der Buchung entscheiden.</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container faq-list">
+      {
+        faqs.map((faq) => (
+          <article class="card faq-item">
+            <h2 class="h3">{faq.question}</h2>
+            <p>{faq.answer}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+  <BookingBand />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: #f4efe6;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 16px;
+  }
+
+  .faq-item {
+    padding: 24px;
+  }
+
+  p {
+    color: var(--muted);
+    line-height: 1.6;
+  }
+</style>

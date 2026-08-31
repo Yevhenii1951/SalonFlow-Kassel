@@ -1,0 +1,33 @@
+---
+import BookingBand from "../components/BookingBand.astro";
+import GalleryGrid from "../components/GalleryGrid.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Galerie"
+  description="Galerie fuer SalonFlow Kassel mit neutralen Platzhalterbildern fuer Salon, Farbe und Styling."
+>
+  <section class="section page-hero">
+    <div class="container">
+      <p class="eyebrow">Galerie</p>
+      <h1 class="h1">Bilder entscheiden schneller als Absatze.</h1>
+      <p class="lead">
+        Fuer echte Kundenprojekte ist die Galerie oft der wichtigste Vertrauensbeweis.
+        Dieses MVP zeigt die Struktur, nicht echte Salonarbeiten.
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <GalleryGrid />
+    </div>
+  </section>
+  <BookingBand />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: #f4efe6;
+  }
+</style>

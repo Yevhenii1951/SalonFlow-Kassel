@@ -1,0 +1,43 @@
+---
+import BookingBand from "../components/BookingBand.astro";
+import PriceList from "../components/PriceList.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Preise"
+  description="Preisuebersicht fuer den fiktiven SalonFlow Kassel mit Schnitt, Farbe, Balayage und Event-Styling."
+>
+  <section class="section page-hero">
+    <div class="container narrow">
+      <p class="eyebrow">Preise</p>
+      <h1 class="h1">Transparente Orientierung vor dem Termin.</h1>
+      <p class="lead">
+        Viele Salonpreise muessen mit "ab" arbeiten. Wichtig ist, dass Besucher
+        trotzdem verstehen, in welcher Preisklasse sie sich bewegen.
+      </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <PriceList />
+      <p class="hint">
+        Alle Preise sind Platzhalter fuer ein Portfolio-Projekt. Rechtssichere
+        Preisangaben muessen im echten Projekt mit dem Betrieb abgestimmt werden.
+      </p>
+    </div>
+  </section>
+  <BookingBand />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: #f4efe6;
+  }
+
+  .hint {
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 24px;
+  }
+</style>
