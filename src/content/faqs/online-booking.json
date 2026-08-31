@@ -1,6 +1,6 @@
 {
   "order": 1,
   "question": "Kann ich online einen Termin buchen?",
-  "answer": "Ja. In diesem Portfolio-Projekt fuehrt der Buchungsbutton zu einem externen Booking-Mock. In einem echten Kundenprojekt koennte dort StudioBookr, Treatwell, Shore oder ein anderer Anbieter angebunden werden.",
+  "answer": "Ja. In diesem Portfolio-Projekt führt der Buchungsbutton zu einem externen Booking-Mock. In einem echten Kundenprojekt könnte dort StudioBookr, Treatwell, Shore oder ein anderer Anbieter angebunden werden.",
   "category": "Booking"
 }
