@@ -3,7 +3,7 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
 
 # Decap CMS (public/admin) and config.yml (public/admin/config.yml) are static files
 # in public/ and served directly by Netlify. No admin redirect is needed.
