@@ -58,3 +58,7 @@ CMS/mock content -> Astro pages -> static/server-rendered HTML
 
 - Build/lint.
 - Browser scenarios for homepage, service page, booking CTA, contact, mobile.
+
+## Implemented CMS/Booking Boundary
+
+Content source is now src/content/ with Astro Content Collections. Pages consume content through src/lib/cms.ts. Booking CTAs go to /termin/, which uses CMS/env provider settings and then sends users to the external booking system.

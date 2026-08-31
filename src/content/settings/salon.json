@@ -1,0 +1,31 @@
+{
+  "name": "SalonFlow Kassel",
+  "city": "Kassel",
+  "tagline": "Farbe, Schnitt und Styling mit klarer Beratung.",
+  "phone": "+49 561 000000",
+  "email": "termin@salonflow-kassel.example",
+  "booking": {
+    "provider": "StudioBookr",
+    "url": "https://example.com/termin-buchen",
+    "mode": "link"
+  },
+  "address": {
+    "street": "Friedrich-Ebert-Strasse 48",
+    "postalCode": "34117",
+    "city": "Kassel"
+  },
+  "hours": [
+    {
+      "day": "Mo",
+      "time": "geschlossen"
+    },
+    {
+      "day": "Di-Fr",
+      "time": "09:00-19:00"
+    },
+    {
+      "day": "Sa",
+      "time": "09:00-15:00"
+    }
+  ]
+}

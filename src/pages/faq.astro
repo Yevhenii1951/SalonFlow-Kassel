@@ -1,7 +1,10 @@
 ---
 import BookingBand from "../components/BookingBand.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { faqs } from "../data/salon";
+import { getBookingIntegration, getFaqs, getSalon } from "../lib/cms";
+
+const [salon, faqs] = await Promise.all([getSalon(), getFaqs()]);
+const booking = getBookingIntegration(salon);
 ---
 
 <BaseLayout
@@ -26,7 +29,7 @@ import { faqs } from "../data/salon";
       }
     </div>
   </section>
-  <BookingBand />
+  <BookingBand salon={salon} booking={booking} />
 </BaseLayout>
 
 <style>

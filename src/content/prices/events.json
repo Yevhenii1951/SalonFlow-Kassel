@@ -1,0 +1,18 @@
+{
+  "order": 3,
+  "name": "Events",
+  "items": [
+    {
+      "label": "Brautstyling Probe",
+      "price": "ab 89 EUR"
+    },
+    {
+      "label": "Brautstyling Hochzeitstag",
+      "price": "ab 189 EUR"
+    },
+    {
+      "label": "Abendstyling",
+      "price": "ab 64 EUR"
+    }
+  ]
+}

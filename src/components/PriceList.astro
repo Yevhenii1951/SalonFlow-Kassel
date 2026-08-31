@@ -1,5 +1,16 @@
 ---
-import { priceGroups } from "../data/salon";
+interface Props {
+  priceGroups: Array<{
+    name: string;
+    items: Array<{
+      label: string;
+      price: string;
+      note?: string;
+    }>;
+  }>;
+}
+
+const { priceGroups } = Astro.props;
 ---
 
 <div class="price-grid">
@@ -8,10 +19,10 @@ import { priceGroups } from "../data/salon";
       <section class="card price-card">
         <h2 class="h3">{group.name}</h2>
         <ul>
-          {group.items.map(([label, price]) => (
+          {group.items.map((item) => (
             <li>
-              <span>{label}</span>
-              <strong>{price}</strong>
+              <span>{item.label}</span>
+              <strong>{item.price}</strong>
             </li>
           ))}
         </ul>

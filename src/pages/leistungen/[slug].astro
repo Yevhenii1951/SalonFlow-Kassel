@@ -2,9 +2,11 @@
 import BookingBand from "../../components/BookingBand.astro";
 import GalleryGrid from "../../components/GalleryGrid.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { services } from "../../data/salon";
+import { getBookingIntegration, getGalleryItems, getSalon, getServices } from "../../lib/cms";
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const services = await getServices();
+
   return services.map((service) => ({
     params: { slug: service.slug },
     props: { service },
@@ -12,29 +14,28 @@ export function getStaticPaths() {
 }
 
 const { service } = Astro.props;
+const [salon, gallery] = await Promise.all([getSalon(), getGalleryItems()]);
+const booking = getBookingIntegration(salon);
 ---
 
-<BaseLayout
-  title={`${service.title} Kassel`}
-  description={`${service.title} bei SalonFlow Kassel: Beratung, Preisorientierung und Terminbuchung fuer lokale Kundinnen und Kunden.`}
->
+<BaseLayout title={service.seoTitle} description={service.seoDescription}>
   <section class="section detail-hero">
     <div class="container detail-grid">
       <div>
         <p class="eyebrow">Leistung in Kassel</p>
         <h1 class="h1">{service.title}</h1>
-        <p class="lead">{service.summary}</p>
+        <p class="lead">{service.longDescription}</p>
         <div class="facts">
           <span>{service.price}</span>
           <span>{service.duration}</span>
         </div>
-        <a class="btn btn-primary" href="/kontakt/">Beratung anfragen</a>
+        <a class="btn btn-primary" href="/termin/">{service.bookingCtaLabel}</a>
       </div>
       <aside class="card note">
         <strong>SEO-Ziel dieser Seite</strong>
         <p>
           Eine eigene Detailseite kann fuer lokale Suchanfragen wie "{service.title}
-          Kassel" ranken und fuehrt Nutzer direkt zum passenden Termin.
+          Kassel" ranken und Nutzer direkt zum passenden Termin fuehren.
         </p>
       </aside>
     </div>
@@ -60,11 +61,11 @@ const { service } = Astro.props;
       <h2 class="h2">Bildsprache fuer Vertrauen und Erwartungsmanagement.</h2>
     </div>
     <div class="container section-tight">
-      <GalleryGrid />
+      <GalleryGrid gallery={gallery} />
     </div>
   </section>
 
-  <BookingBand title={`${service.title} Termin planen`} />
+  <BookingBand salon={salon} booking={booking} title={service.title + " Termin planen"} />
 </BaseLayout>
 
 <style>

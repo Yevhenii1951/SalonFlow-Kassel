@@ -1,5 +1,12 @@
 ---
-import { salon } from "../data/salon";
+interface Props {
+  salon: {
+    name: string;
+  };
+  bookingUrl: string;
+}
+
+const { salon, bookingUrl } = Astro.props;
 ---
 
 <section class="hero">
@@ -12,7 +19,7 @@ import { salon } from "../data/salon";
         schnelle Buchung, klare Leistungen und starke lokale Auffindbarkeit.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href={salon.bookingUrl}>Termin buchen</a>
+        <a class="btn btn-primary" href={bookingUrl}>Termin buchen</a>
         <a class="btn btn-secondary" href="/leistungen/">Leistungen ansehen</a>
       </div>
     </div>

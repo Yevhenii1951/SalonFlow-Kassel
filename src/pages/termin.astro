@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getBookingIntegration, getSalon } from "../lib/cms";
+
+const salon = await getSalon();
+const booking = getBookingIntegration(salon);
+---
+
+<BaseLayout
+  title="Termin buchen"
+  description="Terminbuchung fuer SalonFlow Kassel ueber einen externen Booking-Anbieter."
+>
+  <section class="section booking-page">
+    <div class="container booking-grid">
+      <div>
+        <p class="eyebrow">Terminbuchung</p>
+        <h1 class="h1">Termin online buchen.</h1>
+        <p class="lead">
+          In diesem Projekt ist die Buchung als echte Integrationsstelle angelegt:
+          Anbieter, Link und optionaler Embed kommen aus CMS/env und koennen fuer
+          StudioBookr, Treatwell, Shore oder andere Tools ersetzt werden.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href={booking.url} target="_blank" rel="noreferrer">
+            Bei {booking.provider} buchen
+          </a>
+          <a class="btn btn-secondary" href={"tel:" + salon.phone.replaceAll(" ", "")}>{salon.phone}</a>
+        </div>
+      </div>
+      <aside class="card booking-card">
+        <strong>Integration</strong>
+        <p>Anbieter: {booking.provider}</p>
+        <p>Modus: {booking.mode}</p>
+        <p class="text-muted">
+          Fuer echte Kunden wird hier der finale Anbieterlink oder Widget-Code aus
+          dem Booking-System eingesetzt.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  {
+    booking.mode === "embed" && booking.embedUrl ? (
+      <section class="section embed-section">
+        <div class="container">
+          <iframe
+            class="booking-frame"
+            src={booking.embedUrl}
+            title={booking.provider + " Terminbuchung"}
+            loading="lazy"
+          />
+        </div>
+      </section>
+    ) : null
+  }
+</BaseLayout>
+
+<style>
+  .booking-page {
+    background: #f4efe6;
+  }
+
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 34px;
+    align-items: start;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .booking-card {
+    padding: 28px;
+  }
+
+  .booking-card p {
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .embed-section {
+    background: #fff;
+  }
+
+  .booking-frame {
+    width: 100%;
+    min-height: 720px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  @media (max-width: 820px) {
+    .booking-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,5 +1,14 @@
 ---
-import { gallery } from "../data/salon";
+interface Props {
+  gallery: Array<{
+    title: string;
+    category: string;
+    image: string;
+    alt: string;
+  }>;
+}
+
+const { gallery } = Astro.props;
 ---
 
 <div class="gallery-grid">

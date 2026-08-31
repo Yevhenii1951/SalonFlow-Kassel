@@ -1,0 +1,18 @@
+{
+  "order": 2,
+  "name": "Farbe",
+  "items": [
+    {
+      "label": "Ansatzfarbe",
+      "price": "ab 58 EUR"
+    },
+    {
+      "label": "Glossing",
+      "price": "ab 42 EUR"
+    },
+    {
+      "label": "Balayage inkl. Beratung",
+      "price": "ab 145 EUR"
+    }
+  ]
+}

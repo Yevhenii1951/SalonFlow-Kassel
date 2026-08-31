@@ -1,6 +1,10 @@
 ---
 import "../styles/global.css";
-import { navItems, salon, schema } from "../data/salon";
+import {
+  getLocalBusinessSchema,
+  getSalon,
+  navItems,
+} from "../lib/cms";
 
 interface Props {
   title: string;
@@ -9,6 +13,8 @@ interface Props {
 }
 
 const { title, description, canonical = Astro.url.pathname } = Astro.props;
+const salon = await getSalon();
+const schema = getLocalBusinessSchema(salon);
 const pageTitle = `${title} | ${salon.name}`;
 const canonicalUrl = new URL(canonical, Astro.site).toString();
 ---
@@ -41,12 +47,12 @@ const canonicalUrl = new URL(canonical, Astro.site).toString();
           ))
         }
       </nav>
-      <a class="btn btn-primary header-cta" href={salon.bookingUrl}>Termin buchen</a>
+      <a class="btn btn-primary header-cta" href="/termin/">Termin buchen</a>
     </header>
     <main>
       <slot />
     </main>
-    <a class="btn btn-primary mobile-sticky-cta" href={salon.bookingUrl}>Termin buchen</a>
+    <a class="btn btn-primary mobile-sticky-cta" href="/termin/">Termin buchen</a>
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>

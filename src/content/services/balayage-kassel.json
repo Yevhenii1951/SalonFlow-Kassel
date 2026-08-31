@@ -1,0 +1,18 @@
+{
+  "order": 1,
+  "title": "Balayage",
+  "slug": "balayage-kassel",
+  "summary": "Weiche Farbverlaeufe, Beratung vorab und Pflegeplan fuer zuhause.",
+  "longDescription": "Balayage ist ein beratungsintensiver Farbservice. Die Seite erklaert Ergebnis, Aufwand, Preisorientierung und den naechsten Schritt zur Terminbuchung.",
+  "price": "ab 145 EUR",
+  "duration": "ca. 2,5-4 Std.",
+  "category": "Farbe",
+  "featured": true,
+  "heroImage": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1200&q=80",
+  "galleryImages": [
+    "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1200&q=80"
+  ],
+  "bookingCtaLabel": "Balayage-Beratung buchen",
+  "seoTitle": "Balayage Kassel",
+  "seoDescription": "Balayage in Kassel: Beratung, Preisorientierung, Pflegeempfehlung und Online-Termin beim fiktiven SalonFlow Kassel."
+}

@@ -4,14 +4,26 @@ import GalleryGrid from "../components/GalleryGrid.astro";
 import Hero from "../components/Hero.astro";
 import ServiceGrid from "../components/ServiceGrid.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { salon, testimonials } from "../data/salon";
+import { getBookingIntegration, getGalleryItems, getSalon, getServices } from "../lib/cms";
+
+const [salon, services, gallery] = await Promise.all([
+  getSalon(),
+  getServices(),
+  getGalleryItems(),
+]);
+const booking = getBookingIntegration(salon);
+const testimonials = [
+  "Sehr klare Beratung und ein Ergebnis, das auch nach Wochen noch gut aussieht.",
+  "Online-Termin war schnell erledigt, Preise waren vorher verstaendlich.",
+  "Ruhiger Salon, gute Empfehlungen und keine Hektik beim ersten Besuch.",
+];
 ---
 
 <BaseLayout
   title="Friseur Kassel"
   description="Fiktiver moderner Friseursalon in Kassel mit Balayage, Schnitt, Styling, Online-Termin und lokaler SEO-Struktur."
 >
-  <Hero />
+  <Hero salon={salon} bookingUrl="/termin/" />
 
   <section class="section">
     <div class="container intro-grid">
@@ -25,7 +37,7 @@ import { salon, testimonials } from "../data/salon";
       </p>
     </div>
     <div class="container section-tight">
-      <ServiceGrid featuredOnly />
+      <ServiceGrid services={services} featuredOnly />
     </div>
   </section>
 
@@ -37,7 +49,7 @@ import { salon, testimonials } from "../data/salon";
       </div>
       <div class="proof-list">
         <article><strong>Mobile zuerst</strong><span>Booking und Telefon sind sofort erreichbar.</span></article>
-        <article><strong>CMS-ready</strong><span>Services, Preise, Galerie, Team und FAQ liegen als strukturierte Daten vor.</span></article>
+        <article><strong>CMS-ready</strong><span>Services, Preise, Galerie, Team und FAQ liegen als strukturierte Content Collections vor.</span></article>
         <article><strong>Deutschland-ready</strong><span>Impressum, Datenschutz, lokale Keywords und Kontaktinformationen sind eingeplant.</span></article>
       </div>
     </div>
@@ -55,7 +67,7 @@ import { salon, testimonials } from "../data/salon";
       </p>
     </div>
     <div class="container section-tight">
-      <GalleryGrid />
+      <GalleryGrid gallery={gallery} />
     </div>
   </section>
 
@@ -70,7 +82,9 @@ import { salon, testimonials } from "../data/salon";
   </section>
 
   <BookingBand
-    title={`Termin bei ${salon.name} buchen`}
+    salon={salon}
+    booking={booking}
+    title={"Termin bei " + salon.name + " buchen"}
     text="Der wichtigste Button bleibt ueber die ganze Website hinweg sichtbar und fuehrt in Phase 1 zu einem externen Booking-Link."
   />
 </BaseLayout>

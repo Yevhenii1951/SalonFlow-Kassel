@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { salon } from "../data/salon";
+import { getSalon } from "../lib/cms";
+
+const salon = await getSalon();
 ---
 
 <BaseLayout
@@ -17,8 +19,8 @@ import { salon } from "../data/salon";
           erst nach Zustimmung geladen wuerde.
         </p>
         <div class="actions">
-          <a class="btn btn-primary" href={salon.bookingUrl}>Termin buchen</a>
-          <a class="btn btn-secondary" href={`tel:${salon.phone.replaceAll(" ", "")}`}>{salon.phone}</a>
+          <a class="btn btn-primary" href="/termin/">Termin buchen</a>
+          <a class="btn btn-secondary" href={"tel:" + salon.phone.replaceAll(" ", "")}>{salon.phone}</a>
         </div>
       </div>
       <aside class="card contact-card">
@@ -27,9 +29,9 @@ import { salon } from "../data/salon";
           {salon.address.street}<br />
           {salon.address.postalCode} {salon.address.city}
         </p>
-        <p><a href={`mailto:${salon.email}`}>{salon.email}</a></p>
+        <p><a href={"mailto:" + salon.email}>{salon.email}</a></p>
         <ul>
-          {salon.hours.map(([day, time]) => <li><span>{day}</span><strong>{time}</strong></li>)}
+          {salon.hours.map((item) => <li><span>{item.day}</span><strong>{item.time}</strong></li>)}
         </ul>
       </aside>
     </div>

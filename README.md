@@ -40,3 +40,11 @@ npm run build
 This is not a real salon website and does not copy a real brand, copy, or media
 assets. Legal pages are placeholders and must be replaced with client-specific
 content before any real launch in Germany.
+
+## CMS And Booking
+
+Content is now stored in Astro Content Collections under src/content/ and validated by src/content.config.ts.
+
+A Decap CMS scaffold is available at /admin/index.html with config in public/admin/index.htmlconfig.yml.
+
+Booking CTAs point to /termin/, which reads provider settings from src/content/settings/salon.json and can be overridden with .env values. See docs/cms-and-booking.md.

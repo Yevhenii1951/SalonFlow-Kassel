@@ -1,0 +1,134 @@
+backend:
+  name: github
+  repo: Yevhenii1951/SalonFlow-Kassel
+  branch: main
+
+local_backend: true
+media_folder: public/uploads
+public_folder: /uploads
+publish_mode: editorial_workflow
+
+collections:
+  - name: settings
+    label: Einstellungen
+    files:
+      - name: salon
+        label: Salon
+        file: src/content/settings/salon.json
+        format: json
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Stadt, name: city, widget: string }
+          - { label: Claim, name: tagline, widget: string }
+          - { label: Telefon, name: phone, widget: string }
+          - { label: E-Mail, name: email, widget: string }
+          - label: Booking
+            name: booking
+            widget: object
+            fields:
+              - { label: Anbieter, name: provider, widget: string, hint: "z.B. StudioBookr, Treatwell, Shore" }
+              - { label: Buchungslink, name: url, widget: string }
+              - { label: Embed URL, name: embedUrl, widget: string, required: false }
+              - { label: Modus, name: mode, widget: select, options: [link, embed], default: link }
+          - label: Adresse
+            name: address
+            widget: object
+            fields:
+              - { label: Strasse, name: street, widget: string }
+              - { label: PLZ, name: postalCode, widget: string }
+              - { label: Stadt, name: city, widget: string }
+          - label: Oeffnungszeiten
+            name: hours
+            widget: list
+            fields:
+              - { label: Tag, name: day, widget: string }
+              - { label: Zeit, name: time, widget: string }
+
+  - name: services
+    label: Leistungen
+    folder: src/content/services
+    create: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - { label: Reihenfolge, name: order, widget: number, value_type: int }
+      - { label: Titel, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string }
+      - { label: Kurztext, name: summary, widget: text }
+      - { label: Langtext, name: longDescription, widget: text }
+      - { label: Preis, name: price, widget: string }
+      - { label: Dauer, name: duration, widget: string }
+      - { label: Kategorie, name: category, widget: string }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - { label: Hero Image, name: heroImage, widget: string, required: false }
+      - { label: Gallery Images, name: galleryImages, widget: list, field: { label: URL, name: url, widget: string }, required: false }
+      - { label: CTA Label, name: bookingCtaLabel, widget: string, default: "Termin buchen" }
+      - { label: SEO Title, name: seoTitle, widget: string }
+      - { label: SEO Description, name: seoDescription, widget: text }
+
+  - name: prices
+    label: Preise
+    folder: src/content/prices
+    create: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    fields:
+      - { label: Reihenfolge, name: order, widget: number, value_type: int }
+      - { label: Kategorie, name: name, widget: string }
+      - label: Positionen
+        name: items
+        widget: list
+        fields:
+          - { label: Leistung, name: label, widget: string }
+          - { label: Preis, name: price, widget: string }
+          - { label: Hinweis, name: note, widget: string, required: false }
+
+  - name: team
+    label: Team
+    folder: src/content/team
+    create: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: name
+    fields:
+      - { label: Reihenfolge, name: order, widget: number, value_type: int }
+      - { label: Name, name: name, widget: string }
+      - { label: Rolle, name: role, widget: string }
+      - { label: Fokus, name: focus, widget: string }
+      - { label: Bio, name: bio, widget: text }
+      - { label: Foto, name: photo, widget: string, required: false }
+
+  - name: gallery
+    label: Galerie
+    folder: src/content/gallery
+    create: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - { label: Reihenfolge, name: order, widget: number, value_type: int }
+      - { label: Titel, name: title, widget: string }
+      - { label: Kategorie, name: category, widget: string }
+      - { label: Bild, name: image, widget: string }
+      - { label: Alt Text, name: alt, widget: string }
+      - { label: Related Service Slug, name: relatedServiceSlug, widget: string, required: false }
+
+  - name: faqs
+    label: FAQ
+    folder: src/content/faqs
+    create: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: question
+    fields:
+      - { label: Reihenfolge, name: order, widget: number, value_type: int }
+      - { label: Frage, name: question, widget: string }
+      - { label: Antwort, name: answer, widget: text }
+      - { label: Kategorie, name: category, widget: string }

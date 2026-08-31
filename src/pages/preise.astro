@@ -2,6 +2,10 @@
 import BookingBand from "../components/BookingBand.astro";
 import PriceList from "../components/PriceList.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getBookingIntegration, getPriceGroups, getSalon } from "../lib/cms";
+
+const [salon, priceGroups] = await Promise.all([getSalon(), getPriceGroups()]);
+const booking = getBookingIntegration(salon);
 ---
 
 <BaseLayout
@@ -20,14 +24,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
   <section class="section">
     <div class="container">
-      <PriceList />
+      <PriceList priceGroups={priceGroups} />
       <p class="hint">
         Alle Preise sind Platzhalter fuer ein Portfolio-Projekt. Rechtssichere
         Preisangaben muessen im echten Projekt mit dem Betrieb abgestimmt werden.
       </p>
     </div>
   </section>
-  <BookingBand />
+  <BookingBand salon={salon} booking={booking} />
 </BaseLayout>
 
 <style>

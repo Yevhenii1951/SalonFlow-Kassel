@@ -1,11 +1,17 @@
 ---
-import { services } from "../data/salon";
-
 interface Props {
+  services: Array<{
+    title: string;
+    slug: string;
+    summary: string;
+    price: string;
+    duration: string;
+    featured: boolean;
+  }>;
   featuredOnly?: boolean;
 }
 
-const { featuredOnly = false } = Astro.props;
+const { services, featuredOnly = false } = Astro.props;
 const visibleServices = featuredOnly ? services.filter((service) => service.featured) : services;
 ---
 

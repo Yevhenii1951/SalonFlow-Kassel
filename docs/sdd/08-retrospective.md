@@ -29,3 +29,11 @@ Fill this after the first implementation phase.
 - `astro-cms-site-builder`: add rule to keep phase 1 content in structured data before adding a CMS.
 - `local-business-auditor`: add rule to verify CTA visibility on homepage, service detail, and contact page.
 
+
+## Iteration 2: CMS And Booking
+
+- Moved editable content from src/data/salon.ts into Astro Content Collections under src/content/.
+- Added schemas in src/content.config.ts and read helpers in src/lib/cms.ts.
+- Added Decap CMS scaffold in public/admin/index.html and public/admin/config.yml for GitHub-backed editing.
+- Routed all booking CTAs to /termin/ and kept the external provider URL configurable via CMS/env.
+- Kept booking in link mode by default; embed mode exists but should be enabled only after privacy and mobile checks.

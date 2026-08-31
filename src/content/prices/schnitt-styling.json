@@ -1,0 +1,18 @@
+{
+  "order": 1,
+  "name": "Schnitt & Styling",
+  "items": [
+    {
+      "label": "Damenhaarschnitt inkl. Styling",
+      "price": "ab 54 EUR"
+    },
+    {
+      "label": "Herrenhaarschnitt",
+      "price": "ab 34 EUR"
+    },
+    {
+      "label": "Waschen & Foehnen",
+      "price": "ab 32 EUR"
+    }
+  ]
+}

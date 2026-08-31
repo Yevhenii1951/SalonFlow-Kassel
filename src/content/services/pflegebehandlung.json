@@ -1,0 +1,16 @@
+{
+  "order": 6,
+  "title": "Pflegebehandlung",
+  "slug": "pflegebehandlung",
+  "summary": "Intensive Pflege fuer strapaziertes, trockenes oder coloriertes Haar.",
+  "longDescription": "Pflegebehandlungen eignen sich als Zusatzservice und koennen in echten Booking-Systemen als Add-on modelliert werden.",
+  "price": "ab 28 EUR",
+  "duration": "ca. 20 Min.",
+  "category": "Pflege",
+  "featured": false,
+  "heroImage": "https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=1200&q=80",
+  "galleryImages": [],
+  "bookingCtaLabel": "Pflege buchen",
+  "seoTitle": "Haarpflege Kassel",
+  "seoDescription": "Haarpflege und Pflegebehandlung in Kassel beim fiktiven SalonFlow Kassel."
+}

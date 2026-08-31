@@ -1,0 +1,16 @@
+{
+  "order": 5,
+  "title": "Brautstyling",
+  "slug": "brautstyling",
+  "summary": "Probe, Frisur und Make-up fuer Hochzeitstage in Kassel und Umgebung.",
+  "longDescription": "Brautstyling braucht Vertrauen, Ablaufklarheit und fruehe Anfrage. Diese Seite ist auf Beratung statt Sofortbuchung ausgelegt.",
+  "price": "ab 189 EUR",
+  "duration": "nach Aufwand",
+  "category": "Event",
+  "featured": false,
+  "heroImage": "https://images.unsplash.com/photo-1522336572468-97b06e8ef143?auto=format&fit=crop&w=1200&q=80",
+  "galleryImages": [],
+  "bookingCtaLabel": "Anfrage senden",
+  "seoTitle": "Brautstyling Kassel",
+  "seoDescription": "Brautstyling in Kassel mit Probe, Frisur und Make-up im fiktiven SalonFlow Kassel."
+}

@@ -1,0 +1,16 @@
+{
+  "order": 2,
+  "title": "Damenhaarschnitt",
+  "slug": "damenhaarschnitt",
+  "summary": "Schnitt, Styling und Empfehlungen passend zu Alltag und Haarstruktur.",
+  "longDescription": "Ein guter Schnitt muss zum Alltag passen. Diese Seite fuehrt Besucherinnen von Wunschbild und Beratung zur schnellen Buchung.",
+  "price": "ab 54 EUR",
+  "duration": "ca. 60 Min.",
+  "category": "Schnitt",
+  "featured": true,
+  "heroImage": "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1200&q=80",
+  "galleryImages": [],
+  "bookingCtaLabel": "Schnitt buchen",
+  "seoTitle": "Damenhaarschnitt Kassel",
+  "seoDescription": "Damenhaarschnitt in Kassel mit Beratung, Styling und Online-Termin beim fiktiven SalonFlow Kassel."
+}
