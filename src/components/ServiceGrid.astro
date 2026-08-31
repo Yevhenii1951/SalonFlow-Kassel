@@ -7,6 +7,7 @@ interface Props {
     price: string;
     duration: string;
     featured: boolean;
+    heroImage?: string;
   }>;
   featuredOnly?: boolean;
 }
@@ -19,7 +20,14 @@ const visibleServices = featuredOnly ? services.filter((service) => service.feat
   {
     visibleServices.map((service) => (
       <article class="card service-card">
-        <div>
+        {
+          service.heroImage && (
+            <div class="service-image-wrap">
+              <img class="service-image" src={service.heroImage} alt="" loading="lazy" />
+            </div>
+          )
+        }
+        <div class="service-body">
           <p class="service-meta">{service.duration}</p>
           <h3 class="h3">{service.title}</h3>
           <p>{service.summary}</p>
@@ -38,8 +46,33 @@ const visibleServices = featuredOnly ? services.filter((service) => service.feat
     display: flex;
     min-height: 260px;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 24px;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .service-image-wrap {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .service-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+
+  .service-card:hover .service-image {
+    transform: scale(1.05);
+    opacity: 0.65;
+  }
+
+  .service-body {
+    padding: 24px 24px 0;
   }
 
   .service-card p {
@@ -60,7 +93,8 @@ const visibleServices = featuredOnly ? services.filter((service) => service.feat
     justify-content: space-between;
     gap: 12px;
     border-top: 1px solid var(--line);
-    padding-top: 18px;
+    margin: 0 24px;
+    padding: 18px 0 24px;
   }
 
   .service-footer a {
