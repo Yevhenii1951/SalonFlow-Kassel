@@ -164,6 +164,11 @@ h4 {
   border-radius: 6px;
   background: var(--surface);
   box-shadow: 0 12px 30px rgba(32, 32, 29, 0.05);
+  color: var(--ink);
+}
+
+.card a {
+  color: var(--accent-dark);
 }
 
 .text-muted {
