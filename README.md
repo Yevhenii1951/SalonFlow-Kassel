@@ -12,7 +12,7 @@ placeholders, local SEO metadata, and CMS-ready structured content.
 - TypeScript
 - Tailwind CSS
 - Static output
-- CMS-ready data layer in `src/data/salon.ts`
+- CMS-ready data layer in Astro Content Collections under `src/content/`
 
 ## Commands
 
@@ -45,6 +45,6 @@ content before any real launch in Germany.
 
 Content is now stored in Astro Content Collections under src/content/ and validated by src/content.config.ts.
 
-A Decap CMS scaffold is available at /admin/index.html with config in public/admin/index.htmlconfig.yml.
+A Decap CMS scaffold is available at `/admin/index.html` with config in `public/admin/config.yml`.
 
 Booking CTAs point to /termin/, which reads provider settings from src/content/settings/salon.json and can be overridden with .env values. See docs/cms-and-booking.md.

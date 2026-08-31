@@ -25,8 +25,8 @@ The admin scaffold is available at /admin/index.html.
 
 Files:
 
-- public/admin/index.htmlindex.html
-- public/admin/index.htmlconfig.yml
+- public/admin/index.html
+- public/admin/config.yml
 
 The config is prepared for GitHub-backed editing:
 
