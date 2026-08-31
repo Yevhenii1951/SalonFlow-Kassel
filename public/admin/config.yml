@@ -1,12 +1,15 @@
+# Decap CMS backed by Netlify Identity + Git Gateway.
+# On Netlify, /admin/ opens the CMS and editors authenticate via Netlify Identity
+# (invites managed in Netlify dashboard). Git Gateway commits changes to GitHub.
 backend:
-  name: github
-  repo: Yevhenii1951/SalonFlow-Kassel
+  name: git-gateway
   branch: main
 
-local_backend: true
 media_folder: public/uploads
 public_folder: /uploads
 publish_mode: editorial_workflow
+editor:
+  preview: false
 
 collections:
   - name: settings
