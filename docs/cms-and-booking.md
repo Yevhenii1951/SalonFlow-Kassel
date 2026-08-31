@@ -21,19 +21,14 @@ This keeps the website close to a real CMS project while still being easy to ins
 
 ## Decap CMS Admin
 
-The admin scaffold is available at /admin/index.html.
+The admin panel is available at `/admin/index.html` (Netlify serves it as a static file).
 
 Files:
 
-- public/admin/index.html
-- public/admin/config.yml
+- `public/admin/index.html` — includes Decap CMS + Netlify Identity widget
+- `public/admin/config.yml` — configured for git-gateway backend (Netlify Identity)
 
-The config is prepared for GitHub-backed editing:
-
-- repo: Yevhenii1951/SalonFlow-Kassel
-- branch: main
-
-For local CMS editing, run Decap local backend separately. For production, GitHub OAuth/auth must be configured on the hosting side.
+For production editing, editors authenticate via Netlify Identity. The CMS commits changes directly to the GitHub repository's main branch.
 
 ## Booking Integration
 

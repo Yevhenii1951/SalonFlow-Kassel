@@ -56,7 +56,8 @@ CMS/mock content -> Astro pages -> static/server-rendered HTML
 
 ## Testing
 
-- Build/lint.
+- `npm test` runs Vitest: unit tests for normalize.ts and content-integrity cross-reference checks.
+- `npm run build` runs tests first, then astro check, then astro build — gate for deploys.
 - Browser scenarios for homepage, service page, booking CTA, contact, mobile.
 
 ## Implemented CMS/Booking Boundary

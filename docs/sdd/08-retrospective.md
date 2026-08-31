@@ -37,3 +37,26 @@ Fill this after the first implementation phase.
 - Added Decap CMS scaffold in public/admin/index.html and public/admin/config.yml for GitHub-backed editing.
 - Routed all booking CTAs to /termin/ and kept the external provider URL configurable via CMS/env.
 - Kept booking in link mode by default; embed mode exists but should be enabled only after privacy and mobile checks.
+
+## Iteration 3: Netlify, Testing, and Polish
+
+- Added netlify.toml with build command (npm test && astro check && astro build).
+- Switched Decap CMS to git-gateway backend for Netlify Identity integration.
+- Added Netlify Identity widget to public/admin/index.html.
+- Refactored cms.ts: extracted pure logic into src/lib/normalize.ts (normalizeBooking, getLocalBusinessSchema, navItems, byOrder, sortByOrder).
+- Made getLocalBusinessSchema accept a dynamic siteUrl param (no more hardcoded example URL).
+- Added Vitest with two test suites: normalize.test.ts (13 tests) and content-integrity.test.ts (6 tests).
+- Tests gate the build pipeline: npm run build runs tests first.
+- Fixed broken/typo links in README.md and docs/cms-and-booking.md (index.htmlconfig.yml).
+- Added .netlify/ and coverage/ to .gitignore.
+
+### What worked
+
+- Extracting pure functions before writing tests was the right move: normalizeBooking and getLocalBusinessSchema are fully testable without Astro environment mocking.
+- Content-integrity tests (cross-references, required fields, slug uniqueness) complement the schema validation that astro check already does during build.
+- The full pipeline (tests → check → build) runs in ~2s, fast enough to gate deploys.
+
+### What failed
+
+- Astro's astro check type-checks test files too (it found the type-cast hack in tests). Either exclude tests from tsconfig for astro or keep tests fully type-clean. I chose the latter.
+- Decap CMS with git-gateway requires a Netlify deploy with Identity enabled and an invite sent to the editor. This cannot be automated from CLI without auth tokens.

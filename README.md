@@ -19,32 +19,28 @@ placeholders, local SEO metadata, and CMS-ready structured content.
 ```bash
 npm install
 npm run dev
-npm run build
+npm test          # Vitest unit + content-integrity tests
+npm run build     # test -> astro check -> astro build
+npm run preview
 ```
 
-## Pages
+## Deployment (Netlify)
 
-- `/`
-- `/leistungen/`
-- `/leistungen/balayage-kassel/`
-- `/preise/`
-- `/galerie/`
-- `/team/`
-- `/kontakt/`
-- `/faq/`
-- `/impressum/`
-- `/datenschutz/`
+The repo is deploy-ready for Netlify (see `netlify.toml` and `docs/netlify-deploy.md`).
+`npm run build` is the build command; the publish directory is `dist`.
 
-## Notes
+## Legal Note
 
 This is not a real salon website and does not copy a real brand, copy, or media
-assets. Legal pages are placeholders and must be replaced with client-specific
-content before any real launch in Germany.
+assets. Legal pages (Impressum/Datenschutz) are placeholders and must be replaced
+with client-specific content before any real launch in Germany.
 
 ## CMS And Booking
 
-Content is now stored in Astro Content Collections under src/content/ and validated by src/content.config.ts.
+Content is stored in Astro Content Collections under `src/content/` and validated by `src/content.config.ts`.
 
-A Decap CMS scaffold is available at `/admin/index.html` with config in `public/admin/config.yml`.
+A Decap CMS admin is available at `/admin/` (git-gateway backend authenticated via Netlify Identity),
+with config in `public/admin/config.yml`.
 
-Booking CTAs point to /termin/, which reads provider settings from src/content/settings/salon.json and can be overridden with .env values. See docs/cms-and-booking.md.
+Booking CTAs point to `/termin/`, which reads provider settings from `src/content/settings/salon.json`
+and can be overridden with `.env` values. See `docs/cms-and-booking.md` and `docs/netlify-deploy.md`.
