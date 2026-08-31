@@ -64,3 +64,17 @@ export function byOrder<T extends { order: number }>(a: T, b: T): number {
 export function sortByOrder<T extends { order: number }>(items: T[]): T[] {
   return [...items].sort(byOrder);
 }
+
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
+export const navItems: NavItem[] = [
+  { label: "Leistungen", href: "/leistungen/" },
+  { label: "Preise", href: "/preise/" },
+  { label: "Galerie", href: "/galerie/" },
+  { label: "Team", href: "/team/" },
+  { label: "FAQ", href: "/faq/" },
+  { label: "Kontakt", href: "/kontakt/" },
+];

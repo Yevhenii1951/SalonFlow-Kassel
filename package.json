@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
-    "build": "astro check && astro build",
+    "build": "npm test && astro check && astro build",
     "preview": "astro preview --host 0.0.0.0",
-    "check": "astro check"
+    "check": "astro check",
+    "test": "vitest run"
   },
   "dependencies": {
     "@astrojs/check": "latest",
@@ -17,5 +18,7 @@
     "tailwindcss": "latest",
     "typescript": "latest"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "vitest": "^4.1.11"
+  }
 }

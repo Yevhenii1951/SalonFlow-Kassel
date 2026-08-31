@@ -1,14 +1,7 @@
 import { getCollection, getEntry } from "astro:content";
-import { getLocalBusinessSchema as normalizeBusinessSchema, normalizeBooking } from "./normalize";
+import { getLocalBusinessSchema as normalizeBusinessSchema, navItems, normalizeBooking } from "./normalize";
 
-export const navItems = [
-  { label: "Leistungen", href: "/leistungen/" },
-  { label: "Preise", href: "/preise/" },
-  { label: "Galerie", href: "/galerie/" },
-  { label: "Team", href: "/team/" },
-  { label: "FAQ", href: "/faq/" },
-  { label: "Kontakt", href: "/kontakt/" },
-];
+export { navItems };
 
 const byOrder = <T extends { data: { order: number } }>(a: T, b: T) =>
   a.data.order - b.data.order;
