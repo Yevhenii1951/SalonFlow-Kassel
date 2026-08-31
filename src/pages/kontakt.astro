@@ -52,7 +52,16 @@ const salon = await getSalon();
 
 <style>
   .page-hero {
-    background: #f4efe6;
+    background: var(--dark);
+    color: var(--ink-on-dark);
+  }
+
+  .page-hero .eyebrow {
+    color: var(--gold);
+  }
+
+  .page-hero .lead {
+    color: var(--muted-on-dark);
   }
 
   .contact-grid {
@@ -97,7 +106,7 @@ const salon = await getSalon();
   }
 
   .map-placeholder {
-    border: 1px dashed var(--sage);
+    border: 1px dashed var(--accent);
     border-radius: 8px;
     background: #fff;
   }

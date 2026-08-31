@@ -40,7 +40,16 @@ const booking = getBookingIntegration(salon);
 
 <style>
   .page-hero {
-    background: #f4efe6;
+    background: var(--dark);
+    color: var(--ink-on-dark);
+  }
+
+  .page-hero .eyebrow {
+    color: var(--gold);
+  }
+
+  .page-hero .lead {
+    color: var(--muted-on-dark);
   }
 
   .member {
@@ -53,10 +62,10 @@ const booking = getBookingIntegration(salon);
     height: 74px;
     place-items: center;
     border-radius: 50%;
-    background: var(--sage);
-    color: white;
+    background: var(--accent);
+    color: #1a140b;
     font-size: 1.6rem;
-    font-weight: 820;
+    font-weight: 700;
     margin-bottom: 18px;
   }
 

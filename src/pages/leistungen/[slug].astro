@@ -69,7 +69,23 @@ const booking = getBookingIntegration(salon);
 </BaseLayout>
 
 <style>
-  .detail-hero,
+  .detail-hero {
+    background: var(--dark);
+    color: var(--ink-on-dark);
+  }
+
+  .detail-hero .eyebrow {
+    color: var(--gold);
+  }
+
+  .detail-hero .lead {
+    color: var(--muted-on-dark);
+  }
+
+  .detail-hero .note p {
+    color: var(--muted);
+  }
+
   .gallery-band {
     background: #f4efe6;
   }
