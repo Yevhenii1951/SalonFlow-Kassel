@@ -14,7 +14,7 @@ interface Props {
 
 const { title, description, canonical = Astro.url.pathname } = Astro.props;
 const salon = await getSalon();
-const schema = getLocalBusinessSchema(salon);
+const schema = getLocalBusinessSchema(salon, Astro.site?.origin ?? "https://salonflow-kassel.example");
 const pageTitle = `${title} | ${salon.name}`;
 const canonicalUrl = new URL(canonical, Astro.site).toString();
 ---

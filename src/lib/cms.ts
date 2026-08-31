@@ -1,4 +1,5 @@
 import { getCollection, getEntry } from "astro:content";
+import { getLocalBusinessSchema as normalizeBusinessSchema, normalizeBooking } from "./normalize";
 
 export const navItems = [
   { label: "Leistungen", href: "/leistungen/" },
@@ -23,12 +24,11 @@ export async function getSalon() {
 }
 
 export function getBookingIntegration(salon: Awaited<ReturnType<typeof getSalon>>) {
-  return {
-    provider: import.meta.env.PUBLIC_BOOKING_PROVIDER || salon.booking.provider,
-    url: import.meta.env.PUBLIC_BOOKING_URL || salon.booking.url,
-    embedUrl: import.meta.env.PUBLIC_BOOKING_EMBED_URL || salon.booking.embedUrl || "",
-    mode: salon.booking.mode,
-  };
+  return normalizeBooking(salon.booking, {
+    provider: import.meta.env.PUBLIC_BOOKING_PROVIDER,
+    url: import.meta.env.PUBLIC_BOOKING_URL,
+    embedUrl: import.meta.env.PUBLIC_BOOKING_EMBED_URL,
+  });
 }
 
 export async function getServices() {
@@ -71,21 +71,6 @@ export async function getFaqs() {
   }));
 }
 
-export function getLocalBusinessSchema(salon: Awaited<ReturnType<typeof getSalon>>) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "HairSalon",
-    name: salon.name,
-    telephone: salon.phone,
-    email: salon.email,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: salon.address.street,
-      postalCode: salon.address.postalCode,
-      addressLocality: salon.address.city,
-      addressCountry: "DE",
-    },
-    url: "https://salonflow-kassel.example",
-    priceRange: "EUR",
-  };
+export function getLocalBusinessSchema(salon: Awaited<ReturnType<typeof getSalon>>, siteUrl: string) {
+  return normalizeBusinessSchema(salon, siteUrl);
 }
