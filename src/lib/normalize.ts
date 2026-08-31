@@ -36,10 +36,14 @@ export interface SalonBusinessData {
     postalCode: string;
     city: string;
   };
+  coordinates?: {
+    lat: number;
+    lon: number;
+  };
 }
 
 export function getLocalBusinessSchema(salon: SalonBusinessData, siteUrl: string): Record<string, unknown> {
-  return {
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "HairSalon",
     name: salon.name,
@@ -55,6 +59,16 @@ export function getLocalBusinessSchema(salon: SalonBusinessData, siteUrl: string
     url: siteUrl,
     priceRange: "EUR",
   };
+
+  if (salon.coordinates) {
+    schema.geo = {
+      "@type": "GeoCoordinates",
+      latitude: salon.coordinates.lat,
+      longitude: salon.coordinates.lon,
+    };
+  }
+
+  return schema;
 }
 
 export function byOrder<T extends { order: number }>(a: T, b: T): number {

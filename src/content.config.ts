@@ -15,7 +15,7 @@ const settings = defineCollection({
     booking: z.object({
       provider: z.string(),
       url: z.url(),
-      embedUrl: z.url().optional(),
+      embedUrl: z.string().optional(),
       mode: z.enum(["link", "embed"]).default("link"),
     }),
     address: z.object({
@@ -23,6 +23,12 @@ const settings = defineCollection({
       postalCode: z.string(),
       city: z.string(),
     }),
+    coordinates: z
+      .object({
+        lat: z.number(),
+        lon: z.number(),
+      })
+      .optional(),
     hours: z.array(
       z.object({
         day: z.string(),

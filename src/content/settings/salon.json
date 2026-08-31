@@ -7,12 +7,17 @@
   "booking": {
     "provider": "StudioBookr",
     "url": "https://example.com/termin-buchen",
-    "mode": "link"
+    "mode": "embed",
+    "embedUrl": "/booking-demo/"
   },
   "address": {
     "street": "Friedrich-Ebert-Straße 48",
     "postalCode": "34117",
     "city": "Kassel"
+  },
+  "coordinates": {
+    "lat": 51.31535,
+    "lon": 9.48188
   },
   "hours": [
     {

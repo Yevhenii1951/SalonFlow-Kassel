@@ -1,0 +1,187 @@
+---
+const days = ["Di", "Mi", "Do", "Fr", "Sa"];
+const times = ["09:00", "10:30", "12:00", "14:00", "16:00", "17:30"];
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terminbuchung Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <form class="widget">
+      <header class="widget-head">
+        <span class="brand">SalonFlow Kassel</span>
+        <span class="badge">Demo-Terminbuchung</span>
+      </header>
+
+      <div class="field">
+        <label for="service">Leistung</label>
+        <select id="service" name="service">
+          <option>Damenhaarschnitt</option>
+          <option>Herrenhaarschnitt</option>
+          <option>Coloration</option>
+          <option>Balayage</option>
+          <option>Pflegebehandlung</option>
+          <option>Brautstyling</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Tag</label>
+        <div class="segmented">
+          {days.map((day) => <button type="button">{day}</button>)}
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Uhrzeit</label>
+        <div class="segmented">
+          {times.map((time) => <button type="button">{time}</button>)}
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Vor- und Nachname" />
+      </div>
+
+      <div class="field">
+        <label for="phone">Telefon</label>
+        <input id="phone" name="phone" type="tel" placeholder="+49 ..." />
+      </div>
+
+      <button class="submit" type="submit">Anfrage senden</button>
+
+      <p class="note">
+        Dies ist ein interaktiver Demovorschlag ohne echte Buchung. In einem
+        Kundenprojekt verbindet sich dieser Bereich mit dem Booking-System.
+      </p>
+    </form>
+  </body>
+</html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: #f7f4ee;
+    font-family: "Cabin", ui-sans-serif, system-ui, sans-serif;
+    color: #1d1812;
+  }
+
+  .widget {
+    display: grid;
+    gap: 18px;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 28px;
+    background: #ffffff;
+    border: 1px solid #e6e0d4;
+    border-radius: 6px;
+    box-shadow: 0 12px 30px rgba(32, 32, 29, 0.05);
+  }
+
+  .widget-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e6e0d4;
+  }
+
+  .brand {
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1a140b;
+    background: #c8a24b;
+    padding: 5px 9px;
+    border-radius: 999px;
+  }
+
+  .field {
+    display: grid;
+    gap: 8px;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  select,
+  input {
+    width: 100%;
+    border: 1px solid #e6e0d4;
+    border-radius: 4px;
+    background: #fcfbf8;
+    padding: 11px 13px;
+    font: inherit;
+    color: inherit;
+  }
+
+  .segmented {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .segmented button {
+    border: 1px solid #e6e0d4;
+    border-radius: 4px;
+    background: #fcfbf8;
+    color: inherit;
+    padding: 9px 13px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .segmented button:hover {
+    border-color: #c8a24b;
+    color: #1a140b;
+    background: #fdf6e4;
+  }
+
+  .submit {
+    border: 0;
+    border-radius: 4px;
+    background: #c8a24b;
+    color: #1a140b;
+    padding: 13px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .submit:hover {
+    background: #a9862f;
+  }
+
+  .note {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #6f6b62;
+  }
+</style>

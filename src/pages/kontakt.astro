@@ -37,17 +37,35 @@ const salon = await getSalon();
     </div>
   </section>
 
-  <section class="section">
-    <div class="container map-placeholder">
-      <p class="eyebrow">Karte</p>
-      <h2 class="h2">Consent-safe map placeholder.</h2>
-      <p class="lead">
-        In einem echten Projekt würde hier eine OpenStreetMap- oder Google-Maps-
-        Einbettung erst nach Zustimmung geladen. Adresse und Telefon bleiben
-        trotzdem indexierbar und nutzbar.
-      </p>
-    </div>
-  </section>
+  {
+    salon.coordinates ? (
+      <section class="section">
+        <div class="container">
+          <div class="map-head">
+            <p class="eyebrow">Karte</p>
+            <h2 class="h2">So finden Sie uns in Kassel-Mitte.</h2>
+            <p class="text-muted">{salon.address.street}, {salon.address.postalCode} {salon.address.city}</p>
+          </div>
+          <figure class="map-frame">
+            <iframe
+              title="SalonFlow Kassel auf der Karte"
+              src={`https://www.openstreetmap.org/export/embed.html?bbox=${9.48188 - 0.006}%2C${51.31535 - 0.003}%2C${9.48188 + 0.006}%2C${51.31535 + 0.003}&layer=mapnik&marker=${salon.coordinates.lat}%2C${salon.coordinates.lon}`}
+              loading="lazy"
+            ></iframe>
+            <figcaption>
+              <a
+                href={`https://www.openstreetmap.org/?mlat=${salon.coordinates.lat}&mlon=${salon.coordinates.lon}#map=17/${salon.coordinates.lat}/${salon.coordinates.lon}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Größere Karte auf OpenStreetMap öffnen
+              </a>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+    ) : null
+  }
 </BaseLayout>
 
 <style>
@@ -78,15 +96,52 @@ const salon = await getSalon();
     margin-top: 28px;
   }
 
-  .contact-card,
-  .map-placeholder {
+  .contact-card {
     padding: 28px;
   }
 
-  .contact-card p,
-  .map-placeholder p {
+  .contact-card p {
     color: var(--muted);
     line-height: 1.6;
+  }
+
+  .map-head {
+    margin-bottom: 22px;
+  }
+
+  .map-head .text-muted {
+    margin: 10px 0 0;
+  }
+
+  .map-frame {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .map-frame iframe {
+    display: block;
+    width: 100%;
+    height: 440px;
+    border: 0;
+  }
+
+  .map-frame figcaption {
+    padding: 12px 16px;
+    border-top: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+
+  .map-frame a {
+    color: var(--accent-dark);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .map-frame a:hover {
+    text-decoration: underline;
   }
 
   ul {
