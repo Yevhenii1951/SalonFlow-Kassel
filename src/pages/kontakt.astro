@@ -30,6 +30,15 @@ const salon = await getSalon();
           {salon.address.postalCode} {salon.address.city}
         </p>
         <p><a href={"mailto:" + salon.email}>{salon.email}</a></p>
+        <div class="social-links">
+          <p class="social-label">Social & payments</p>
+          <p>
+            <a href="https://www.instagram.com/salonflow-kassel" target="_blank" rel="noreferrer">Instagram</a>
+            · <a href="https://www.facebook.com/salonflow-kassel" target="_blank" rel="noreferrer">Facebook</a>
+            · <a href="https://paypal.me/salonflowkassel" target="_blank" rel="noreferrer">PayPal</a>
+          </p>
+          <p class="social-note">Platzhalter-Links für ein echtes Kundenprojekt.</p>
+        </div>
         <ul>
           {salon.hours.map((item) => <li><span>{item.day}</span><strong>{item.time}</strong></li>)}
         </ul>
@@ -103,6 +112,35 @@ const salon = await getSalon();
   .contact-card p {
     color: var(--muted);
     line-height: 1.6;
+  }
+
+  .contact-card a {
+    color: var(--accent-dark);
+    font-weight: 600;
+  }
+
+  .social-links {
+    margin-top: 18px;
+    border-top: 1px dashed var(--line);
+    padding-top: 14px;
+  }
+
+  .social-label {
+    margin: 0 0 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .social-links p {
+    margin: 4px 0;
+  }
+
+  .social-note {
+    font-size: 0.82rem;
+    color: var(--muted);
   }
 
   .map-head {

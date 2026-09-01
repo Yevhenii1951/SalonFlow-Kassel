@@ -81,6 +81,7 @@ const team = defineCollection({
     role: z.string(),
     focus: z.string(),
     bio: z.string(),
+    quote: z.string().optional(),
     photo: imageUrl.optional(),
   }),
 });

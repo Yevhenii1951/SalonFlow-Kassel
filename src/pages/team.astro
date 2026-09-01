@@ -25,17 +25,25 @@ const booking = getBookingIntegration(salon);
     <div class="container grid-3">
       {
         team.map((member) => (
-          <article class="card member">
-            {
-              member.photo ? (
-                <img class="member-photo" src={member.photo} alt={`${member.name} - ${member.role}`} loading="lazy" />
-              ) : (
-                <div class="avatar">{member.name.slice(0, 1)}</div>
-              )
-            }
-            <h2 class="h3">{member.name}</h2>
-            <p class="role">{member.role}</p>
-            <p>{member.focus}</p>
+          <article class="flip">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                {
+                  member.photo ? (
+                    <img class="member-photo" src={member.photo} alt={`${member.name} - ${member.role}`} loading="lazy" />
+                  ) : (
+                    <div class="avatar">{member.name.slice(0, 1)}</div>
+                  )
+                }
+                <h2 class="h3">{member.name}</h2>
+                <p class="role">{member.role}</p>
+              </div>
+              <div class="flip-face flip-back">
+                <span class="quote-mark">“</span>
+                <p class="quote">{member.quote || member.bio}</p>
+                <p class="focus">{member.focus}</p>
+              </div>
+            </div>
           </article>
         ))
       }
@@ -88,8 +96,71 @@ const booking = getBookingIntegration(salon);
     font-weight: 760;
   }
 
-  p {
-    color: var(--muted);
+  .flip {
+    perspective: 1200px;
+  }
+
+  .flip-inner {
+    position: relative;
+    min-height: 460px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+
+  .flip:hover .flip-inner,
+  .flip:focus-within .flip-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+    box-shadow: 0 12px 30px rgba(32, 32, 29, 0.05);
+    padding: 26px;
+  }
+
+  .flip-front {
+    align-items: flex-start;
+  }
+
+  .flip-front .h3 {
+    color: var(--ink);
+  }
+
+  .flip-back {
+    transform: rotateY(180deg);
+    background: var(--dark-surface);
+    color: var(--ink-on-dark);
+    text-align: center;
+  }
+
+  .quote-mark {
+    display: block;
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .quote {
+    margin: 6px 0 22px;
+    color: var(--muted-on-dark);
+    font-size: 1.02rem;
     line-height: 1.6;
+    font-style: italic;
+  }
+
+  .focus {
+    margin: 0;
+    color: var(--gold);
+    font-weight: 700;
   }
 </style>

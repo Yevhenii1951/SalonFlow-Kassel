@@ -13,9 +13,24 @@ const [salon, services, gallery] = await Promise.all([
 ]);
 const booking = getBookingIntegration(salon);
 const testimonials = [
-  "Sehr klare Beratung und ein Ergebnis, das auch nach Wochen noch gut aussieht.",
-  "Online-Termin war schnell erledigt, Preise waren vorher verständlich.",
-  "Ruhiger Salon, gute Empfehlungen und keine Hektik beim ersten Besuch.",
+  {
+    text: "Sehr klare Beratung und ein Ergebnis, das auch nach Wochen noch gut aussieht.",
+    name: "Sofie",
+    rating: 5,
+    date: "14.05.",
+  },
+  {
+    text: "Online-Termin war schnell erledigt, Preise waren vorher verständlich.",
+    name: "Jonas",
+    rating: 5,
+    date: "02.06.",
+  },
+  {
+    text: "Ruhiger Salon, gute Empfehlungen und keine Hektik beim ersten Besuch.",
+    name: "Meike",
+    rating: 4,
+    date: "21.06.",
+  },
 ];
 ---
 
@@ -38,6 +53,32 @@ const testimonials = [
     </div>
     <div class="container section-tight">
       <ServiceGrid services={services} featuredOnly />
+    </div>
+  </section>
+
+  <section class="section salon-section">
+    <div class="container salon-grid">
+      <figure class="salon-media">
+        <img
+          src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=82"
+          alt="Salonbereich mit gemütlicher Atmosphäre"
+          loading="lazy"
+        />
+      </figure>
+      <div class="salon-copy">
+        <p class="eyebrow">Der Salon</p>
+        <h2 class="h2">Ein Ort zum Wohlfühlen – mit klarer Beratung statt Hektik.</h2>
+        <p class="lead">
+          Der fiktive SalonFlow Kassel ist als Lern- und Präsentationsprojekt
+          aufgebaut: Die Struktur zeigt, wie ein lokaler Salon Vertrauen,
+          Service und eine schnelle Online-Buchung verbindet.
+        </p>
+        <ul class="salon-facts">
+          <li><strong>Twelve stylistisch gestaltete Arbeitsplätze</strong><span>auf etwa 160 qm in heller, ruhiger Atmosphäre.</span></li>
+          <li><strong>Beratung vor jeder Behandlung</strong><span>Ergebnis, Aufwand und Pflege werden offen geklärt.</span></li>
+          <li><strong>Fokus auf die Praxis</strong><span>Diese Seite ist ein Schulungsprojekt – Inhalte sind Platzhalter.</span></li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -76,7 +117,19 @@ const testimonials = [
       <p class="eyebrow">Vertrauen</p>
       <h2 class="h2">Kurze Signale statt leerer Werbetexte.</h2>
       <div class="grid-3 testimonial-grid">
-        {testimonials.map((text) => <blockquote class="card">"{text}"</blockquote>)}
+        {testimonials.map((item) => (
+          <blockquote class="card">
+            <div class="stars" aria-label={`${item.rating} von 5 Sternen`}>
+              {"★".repeat(item.rating)}
+              <span>{"★".repeat(5 - item.rating)}</span>
+            </div>
+            <p>"{item.text}"</p>
+            <footer>
+              <strong>{item.name}</strong>
+              <span>{item.date}</span>
+            </footer>
+          </blockquote>
+        ))}
       </div>
     </div>
   </section>
@@ -115,6 +168,49 @@ const testimonials = [
     padding: 18px;
   }
 
+  .salon-section {
+    background: #fff;
+  }
+
+  .salon-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .salon-media {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .salon-media img {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
+  }
+
+  .salon-facts {
+    display: grid;
+    gap: 14px;
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .salon-facts li {
+    display: grid;
+    gap: 4px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .salon-facts span {
+    color: var(--muted);
+  }
+
   .proof-list span,
   blockquote {
     color: var(--muted);
@@ -131,14 +227,47 @@ const testimonials = [
   blockquote {
     margin: 0;
     padding: 24px;
-    font-size: 1.08rem;
     line-height: 1.6;
+  }
+
+  .stars {
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+  }
+
+  .stars span {
+    color: var(--line);
+  }
+
+  blockquote p {
+    margin: 0 0 16px;
+    font-size: 1.08rem;
+    line-height: 1.55;
+  }
+
+  blockquote footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  blockquote footer strong {
+    color: var(--ink);
   }
 
   @media (max-width: 860px) {
     .intro-grid,
-    .proof-grid {
+    .proof-grid,
+    .salon-grid {
       grid-template-columns: 1fr;
+    }
+
+    .salon-media img {
+      min-height: 300px;
     }
   }
 </style>
