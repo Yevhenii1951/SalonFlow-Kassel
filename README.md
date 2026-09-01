@@ -1,123 +1,125 @@
 # SalonFlow Kassel ✂️
 
-Реалистичный **портфолио-проект веб-сайта немецкого парикмахерского салона** в Касселе.
-Собран как настоящий клиентский проект: онлайн-запись, услуги, цены, галерея, команда,
-контакты с картой, локальный SEO и CMS-ready контент.
+Realistisches **Portfolio-Projekt einer Website für einen fiktiven Friseursalon in Kassel.**
+Aufgebaut wie ein echtes Kundenprojekt: Online-Termin, Leistungen, Preise, Galerie, Team,
+Kontakt mit Karte, lokales SEO und CMS-ready Content.
 
-> Это **учебный / презентационный проект**, а не реальный салон. Весь контент — оригинальные
-> плейсхолдеры. Правовые страницы (Impressum, Datenschutz, AGB) — заглушки и должны быть
-> заменены на реальные перед запуском в Германии.
+> **Live-Demo:** https://clinquant-jalebi-8c402e.netlify.app/
+
+> Das ist ein **Lern- und Präsentationsprojekt**, kein echter Salon. Alle Inhalte sind
+> originale Platzhalter. Rechtsseiten (Impressum, Datenschutz, AGB) sind Platzhalter und
+> müssen vor einem echten Launch in Deutschland ersetzt werden.
 
 ---
 
-## 📸 Скриншоты
+## 📸 Screenshots
 
-| Главная страница | Услуги | Контакты с картой |
+| Startseite | Leistungen | Kontakt mit Karte |
 |---|---|---|
-| ![Главная](docs/screenshots/home.png) | ![Услуги](docs/screenshots/leistungen.png) | ![Контакты](docs/screenshots/kontakt.png) |
+| ![Startseite](docs/screenshots/home.png) | ![Leistungen](docs/screenshots/leistungen.png) | ![Kontakt](docs/screenshots/kontakt.png) |
 
 ---
 
-## 🎯 Для кого это
+## 🎯 Für wen ist das Projekt
 
-Проект показывает подход к разработке **сайтов для локального бизнеса в Германии**:
+Das Projekt zeigt, wie **Websites für lokale Geschäfte in Deutschland** entwickelt werden:
 
-- **Начинающим фронт-энд разработчикам** — как выглядит реалистичный клиентский проект
-  со структурой, контентом и деплоем «как у взрослых».
-- **Потенциальным заказчикам (салоны, студии, мастерские)** — как живой пример сайта
-  с онлайн-записью, картой и локальной SEO-структурой.
-- **Студентам и наставникам** — как демонстрация осознанного выбора стека и результат
-  учебного SDD-процесса.
+- **Angehende Frontend-Entwickler:innen** — wie ein realistisches Kundenprojekt mit Struktur,
+  Inhalten und Deployment „wie im echten Leben“ aufgebaut ist.
+- **Potenzielle Kunden (Salons, Studios, Handwerker)** — als lebendiges Beispiel einer
+  Website mit Online-Termin, Karte und lokaler SEO-Struktur.
+- **Studierende und Mentor:innen** — als Demonstration einer bewussten Stack-Entscheidung
+  und des Ergebnisses eines schlanken SDD-Prozesses.
 
-Типичная аудитория будущего реального проекта — схожие бизнесы: парикмахерские,
-салоны красоты, ногтевые студии, мастера на выезд.
+Die typische Zielgruppe eines künftigen echten Projekts sind ähnliche Geschäfte:
+Friseursalons, Beauty-Salons, Nagelstudios, mobile Dienstleister.
 
 ---
 
-## 🧱 Почему выбрана такая технология
+## 🧱 Warum diese Technologie
 
-| Решение | Почему |
+| Entscheidung | Warum |
 |---|---|
-| **Astro** | Отдаёт чистый статический HTML/CSS/JS — мгновенная загрузка и лучший SEO. Компонентно-модель Ion, нулевой JS по умолчанию. |
-| **TypeScript** | Типизированные данные контента и сервисный слой — меньше ошибок, безопаснее рефакторинг. |
-| **Tailwind CSS** | Быстрая разработка и консистентный дизайн без лишнего CSS-кода. |
-| **Astro Content Collections** | «CMS-ready» данные (услуги, цены, команда, галерея, FAQ) с валидацией схемы — контент можно спроецировать в Decap CMS. |
-| **Decap CMS + Netlify Identity** | Правки контента без git для владельца сайта. |
-| **Vitest** | Тесты на чистые функции (нормализация данных, целостность контента) — защита от деградации. |
-| **Netlify (статический хостинг)** | Бесплатный деплой, автосборка из git, обслуживание без серверов. |
-| **OpenStreetMap embed** | Карта без API-ключа и сторонних трекеров (более privacy-friendly для DE). |
-| **JSON-LD Schema.org** | Локальный SEO: LocalBusiness + GeoCoordinates для поисковых систем. |
+| **Astro** | Liefert echtes statisches HTML/CSS/JS — schnelle Ladezeiten und bestes SEO. Komponentenbasiert, kein JavaScript im Standardfall. |
+| **TypeScript** | Typisierte Content-Daten und Serviceschicht — weniger Fehler, sichereres Refactoring. |
+| **Tailwind CSS** | Schnelle Entwicklung und konsistentes Design ohne überflüssiges CSS. |
+| **Astro Content Collections** | „CMS-ready“ Daten (Leistungen, Preise, Team, Galerie, FAQ) mit Schema-Validierung — Content kann auf Decap CMS abgebildet werden. |
+| **Decap CMS + Netlify Identity** | Content-Änderungen ohne Git für die Website-Betreiberin. |
+| **Vitest** | Tests für reine Funktionen (Daten-Normalisierung, Content-Integrität) — Schutz vor Regressionen. |
+| **Netlify (statisches Hosting)** | Kostenloser Deploy, Auto-Build aus Git, kein Serverbetrieb. |
+| **OpenStreetMap-Embed** | Karte ohne API-Key und ohne Drittanbieter-Tracking (privacy-freundlicher für DE). |
+| **JSON-LD Schema.org** | Lokales SEO: LocalBusiness + GeoCoordinates für Suchmaschinen. |
 
 ---
 
-## ✅ Плюсы
+## ✅ Vorteile
 
-- **Очень быстрый сайт** — статический HTML, нет тяжёлого runtime.
-- **Хороший SEO из коробки** — sitemap, canonical, JSON-LD, локальные ключевые слова.
-- **Контент без разработчика** — Decap CMS через Netlify Identity (git-gateway).
-- **Чистая структура** — данные отделены от шаблонов, всё валидируется схемой.
-- **Простой деплой** — push в git → Netlify пересобирает и публикует.
-- **Недёшево по цене** — никаких серверов и подписок для статики.
-- **Privacy-friendly для Германии** — OSM вместо Google Maps, контент без аналитики по умолчанию.
-- **Тестируемость** — валидация контента и юнит-тесты сервисного слоя.
+- **Sehr schnelle Website** — statisches HTML, kein schwerer Runtime.
+- **Gutes SEO out-of-the-box** — Sitemap, Canonical, JSON-LD, lokale Keywords.
+- **Content ohne Entwickler** — Decap CMS über Netlify Identity (git-gateway).
+- **Klare Struktur** — Daten sind von Templates getrennt, alles wird per Schema validiert.
+- **Einfacher Deploy** — Push ins Git → Netlify baut neu und veröffentlicht.
+- **Günstiger Betrieb** — keine Server oder Abos für statische Seiten.
+- **Privacy-freundlich für Deutschland** — OSM statt Google Maps, Content ohne Analytics standardmäßig.
+- **Testbarkeit** — Content-Validierung und Unit-Tests für den Service-Layer.
 
-## ⚠️ Минусы
+## ⚠️ Nachteile
 
-- **Не «тянет» динамику** — для живого онлайн-записи нужен внешний провайдер
-  (StudioBookr / Treatwell / Calendly), а не только статическая форма.
-- **CMS из коробки — простая** — Decap подходит для текстового контента; для сложных
-  редакторов (блочные секции) потребуется доработка.
-- **Нет серверной логики** — формы/бэкенд (если понадобятся) реализуются через
-  серверные функции Netlify или внешние сервисы.
-- **Tailwind v4 — свежий** — команда должна быть знакома с новой моделью токенов.
-- **Контент-коллекции гибридные** — связка «файлы + CMS» требует дисциплины схемы.
+- **Nicht für echte Dynamik gebaut** — für die Live-Terminbuchung braucht es einen externen
+  Anbieter (StudioBookr / Treatwell / Calendly), nicht nur eine statische Form.
+- **CMS standardmäßig einfach** — Decap eignet sich für Text-Content; für komplexe
+  Block-Editoren braucht es Nacharbeit.
+- **Keine Serverlogik** — Formulare/Backend (falls nötig) laufen über Netlify Functions
+  oder externe Dienste.
+- **Tailwind v4 ist frisch** — das Team muss das neue Token-Modell kennen.
+- **Hybride Content-Collections** — die Kombination „Dateien + CMS“ erfordert Schema-Disziplin.
 
 ---
 
-## 🚀 Быстрый старт
+## 🚀 Schnellstart
 
 ```bash
 npm install
-npm run dev        # локальный сервер разработки
-npm test           # Vitest: юнит + целостность контента
+npm run dev        # lokaler Dev-Server
+npm test           # Vitest: Unit + Content-Integrität
 npm run build      # test -> astro check -> astro build
-npm run preview    # проверка собранного сайта
+npm run preview    # gebaute Website prüfen
 ```
 
-`npm run build` — это пайплайн `npm test && astro check && astro build`.
+`npm run build` ist die Pipeline `npm test && astro check && astro build`.
 
 ---
 
-## 📁 Структура
+## 📁 Struktur
 
 ```
 src/
-  content/            # CMS-ready данные (услуги, цены, команда, галерея, FAQ, настройки)
-  components/         # UI-компоненты (Hero, ServiceGrid, GalleryGrid, BookingBand, PriceList)
-  layouts/            # BaseLayout (шрифты, header/footer, JSON-LD)
-  lib/                # сервисный слой (cms.ts, normalize.ts — чистые функции)
-  pages/              # страницы: index, leistungen/*, preise, galerie, team, faq,
-                      # kontakt, termin, agb, impressum, datenschutz, booking-demo
-tests/                # Vitest-тесты
+  content/            # CMS-ready Daten (Leistungen, Preise, Team, Galerie, FAQ, Settings)
+  components/         # UI-Komponenten (Hero, ServiceGrid, GalleryGrid, BookingBand, PriceList)
+  layouts/            # BaseLayout (Fonts, Header/Footer, JSON-LD)
+  lib/                # Service-Layer (cms.ts, normalize.ts — reine Funktionen)
+  pages/              # Startseite, Leistungen/*, Preise, Galerie, Team, FAQ,
+                      # Kontakt, Termin, AGB, Impressum, Datenschutz, Booking-Demo
+tests/                # Vitest-Tests
 public/admin/         # Decap CMS (config + index.html)
-netlify.toml          # конфиг деплоя Netlify
+netlify.toml          # Netlify-Deploy-Konfiguration
 ```
 
 ---
 
-## 🔗 Деплой и CMS
+## 🔗 Deploy und CMS
 
-- **Netlify**: `netlify.toml` → build `npm run build`, publish `dist`, Node 22.
-  Подробнее: `docs/netlify-deploy.md`.
-- **Decap CMS**: `/admin/` через Netlify Identity + Git Gateway.
-  Подробнее: `docs/cms-and-booking.md`.
-- **Booking**: кнопки ведут на `/termin/`; провайдер и URL берутся из
-  `src/content/settings/salon.json` (override через `.env`).
+- **Netlify**: `netlify.toml` → Build `npm run build`, Publish `dist`, Node 22.
+  Details: `docs/netlify-deploy.md`.
+- **Decap CMS**: `/admin/` über Netlify Identity + Git Gateway.
+  Details: `docs/cms-and-booking.md`.
+- **Terminbuchung**: Buttons führen zu `/termin/`; Anbieter und URL kommen aus
+  `src/content/settings/salon.json` (Override über `.env`).
 
 ---
 
-## ⚖️ Правовая пометка
+## ⚖️ Rechtlicher Hinweis
 
-Проект **не копирует** реальный бренд, тексты и медиа. Impressum / Datenschutz / AGB —
-заглушки для учебной цели. Перед любым реальным запуском в Германии они обязаны быть
-заменены на релевантные для конкретного бизнеса и согласованы с владельцем.
+Das Projekt **kopiert keine** echte Marke, Texte oder Medien. Impressum / Datenschutz / AGB
+sind Platzhalter für Lernzwecke. Vor einem echten Launch in Deutschland müssen sie durch
+für das Geschäft relevante Inhalte ersetzt und mit der Eigentümerin abgestimmt werden.
