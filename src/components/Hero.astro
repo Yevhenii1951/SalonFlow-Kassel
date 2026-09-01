@@ -23,14 +23,20 @@ const { salon, bookingUrl } = Astro.props;
         <a class="btn btn-secondary hero-secondary" href="/leistungen/">Leistungen ansehen</a>
       </div>
     </div>
-    <figure class="hero-media">
-      <img
-        src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=82"
-        alt="Barbershop im dunklen Prestige-Stil mit Ledersesseln"
-        loading="eager"
-      />
+<figure class="hero-media">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=82"
+        aria-label="Barbershop im dunklen Prestige-Stil mit Ledersesseln"
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
       <figcaption>
-        <strong>Heute freie Beratungs-Slots</strong>
+        <strong>Heute freie Beratungsslots</strong>
         <span>Balayage, Schnitt, Styling</span>
       </figcaption>
     </figure>
@@ -101,7 +107,8 @@ const { salon, bookingUrl } = Astro.props;
     background: linear-gradient(180deg, rgba(18, 16, 13, 0.25), rgba(18, 16, 13, 0.55));
   }
 
-  .hero-media img {
+  .hero-media img,
+  .hero-media video {
     width: 100%;
     height: 100%;
     min-height: 600px;
@@ -139,7 +146,8 @@ const { salon, bookingUrl } = Astro.props;
     }
 
     .hero-media,
-    .hero-media img {
+    .hero-media img,
+    .hero-media video {
       min-height: 420px;
     }
   }
