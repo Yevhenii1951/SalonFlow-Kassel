@@ -1,46 +1,123 @@
-# SalonFlow Kassel
+# SalonFlow Kassel ✂️
 
-Realistic portfolio project for a fictional German hair salon in Kassel.
+Реалистичный **портфолио-проект веб-сайта немецкого парикмахерского салона** в Касселе.
+Собран как настоящий клиентский проект: онлайн-запись, услуги, цены, галерея, команда,
+контакты с картой, локальный SEO и CMS-ready контент.
 
-The project demonstrates a lightweight SDD workflow for local business websites:
-clear booking CTA, service pages, price overview, gallery, contact page, legal
-placeholders, local SEO metadata, and CMS-ready structured content.
+> Это **учебный / презентационный проект**, а не реальный салон. Весь контент — оригинальные
+> плейсхолдеры. Правовые страницы (Impressum, Datenschutz, AGB) — заглушки и должны быть
+> заменены на реальные перед запуском в Германии.
 
-## Stack
+---
 
-- Astro
-- TypeScript
-- Tailwind CSS
-- Static output
-- CMS-ready data layer in Astro Content Collections under `src/content/`
+## 📸 Скриншоты
 
-## Commands
+| Главная страница | Услуги | Контакты с картой |
+|---|---|---|
+| ![Главная](docs/screenshots/home.png) | ![Услуги](docs/screenshots/leistungen.png) | ![Контакты](docs/screenshots/kontakt.png) |
+
+---
+
+## 🎯 Для кого это
+
+Проект показывает подход к разработке **сайтов для локального бизнеса в Германии**:
+
+- **Начинающим фронт-энд разработчикам** — как выглядит реалистичный клиентский проект
+  со структурой, контентом и деплоем «как у взрослых».
+- **Потенциальным заказчикам (салоны, студии, мастерские)** — как живой пример сайта
+  с онлайн-записью, картой и локальной SEO-структурой.
+- **Студентам и наставникам** — как демонстрация осознанного выбора стека и результат
+  учебного SDD-процесса.
+
+Типичная аудитория будущего реального проекта — схожие бизнесы: парикмахерские,
+салоны красоты, ногтевые студии, мастера на выезд.
+
+---
+
+## 🧱 Почему выбрана такая технология
+
+| Решение | Почему |
+|---|---|
+| **Astro** | Отдаёт чистый статический HTML/CSS/JS — мгновенная загрузка и лучший SEO. Компонентно-модель Ion, нулевой JS по умолчанию. |
+| **TypeScript** | Типизированные данные контента и сервисный слой — меньше ошибок, безопаснее рефакторинг. |
+| **Tailwind CSS** | Быстрая разработка и консистентный дизайн без лишнего CSS-кода. |
+| **Astro Content Collections** | «CMS-ready» данные (услуги, цены, команда, галерея, FAQ) с валидацией схемы — контент можно спроецировать в Decap CMS. |
+| **Decap CMS + Netlify Identity** | Правки контента без git для владельца сайта. |
+| **Vitest** | Тесты на чистые функции (нормализация данных, целостность контента) — защита от деградации. |
+| **Netlify (статический хостинг)** | Бесплатный деплой, автосборка из git, обслуживание без серверов. |
+| **OpenStreetMap embed** | Карта без API-ключа и сторонних трекеров (более privacy-friendly для DE). |
+| **JSON-LD Schema.org** | Локальный SEO: LocalBusiness + GeoCoordinates для поисковых систем. |
+
+---
+
+## ✅ Плюсы
+
+- **Очень быстрый сайт** — статический HTML, нет тяжёлого runtime.
+- **Хороший SEO из коробки** — sitemap, canonical, JSON-LD, локальные ключевые слова.
+- **Контент без разработчика** — Decap CMS через Netlify Identity (git-gateway).
+- **Чистая структура** — данные отделены от шаблонов, всё валидируется схемой.
+- **Простой деплой** — push в git → Netlify пересобирает и публикует.
+- **Недёшево по цене** — никаких серверов и подписок для статики.
+- **Privacy-friendly для Германии** — OSM вместо Google Maps, контент без аналитики по умолчанию.
+- **Тестируемость** — валидация контента и юнит-тесты сервисного слоя.
+
+## ⚠️ Минусы
+
+- **Не «тянет» динамику** — для живого онлайн-записи нужен внешний провайдер
+  (StudioBookr / Treatwell / Calendly), а не только статическая форма.
+- **CMS из коробки — простая** — Decap подходит для текстового контента; для сложных
+  редакторов (блочные секции) потребуется доработка.
+- **Нет серверной логики** — формы/бэкенд (если понадобятся) реализуются через
+  серверные функции Netlify или внешние сервисы.
+- **Tailwind v4 — свежий** — команда должна быть знакома с новой моделью токенов.
+- **Контент-коллекции гибридные** — связка «файлы + CMS» требует дисциплины схемы.
+
+---
+
+## 🚀 Быстрый старт
 
 ```bash
 npm install
-npm run dev
-npm test          # Vitest unit + content-integrity tests
-npm run build     # test -> astro check -> astro build
-npm run preview
+npm run dev        # локальный сервер разработки
+npm test           # Vitest: юнит + целостность контента
+npm run build      # test -> astro check -> astro build
+npm run preview    # проверка собранного сайта
 ```
 
-## Deployment (Netlify)
+`npm run build` — это пайплайн `npm test && astro check && astro build`.
 
-The repo is deploy-ready for Netlify (see `netlify.toml` and `docs/netlify-deploy.md`).
-`npm run build` is the build command; the publish directory is `dist`.
+---
 
-## Legal Note
+## 📁 Структура
 
-This is not a real salon website and does not copy a real brand, copy, or media
-assets. Legal pages (Impressum/Datenschutz) are placeholders and must be replaced
-with client-specific content before any real launch in Germany.
+```
+src/
+  content/            # CMS-ready данные (услуги, цены, команда, галерея, FAQ, настройки)
+  components/         # UI-компоненты (Hero, ServiceGrid, GalleryGrid, BookingBand, PriceList)
+  layouts/            # BaseLayout (шрифты, header/footer, JSON-LD)
+  lib/                # сервисный слой (cms.ts, normalize.ts — чистые функции)
+  pages/              # страницы: index, leistungen/*, preise, galerie, team, faq,
+                      # kontakt, termin, agb, impressum, datenschutz, booking-demo
+tests/                # Vitest-тесты
+public/admin/         # Decap CMS (config + index.html)
+netlify.toml          # конфиг деплоя Netlify
+```
 
-## CMS And Booking
+---
 
-Content is stored in Astro Content Collections under `src/content/` and validated by `src/content.config.ts`.
+## 🔗 Деплой и CMS
 
-A Decap CMS admin is available at `/admin/` (git-gateway backend authenticated via Netlify Identity),
-with config in `public/admin/config.yml`.
+- **Netlify**: `netlify.toml` → build `npm run build`, publish `dist`, Node 22.
+  Подробнее: `docs/netlify-deploy.md`.
+- **Decap CMS**: `/admin/` через Netlify Identity + Git Gateway.
+  Подробнее: `docs/cms-and-booking.md`.
+- **Booking**: кнопки ведут на `/termin/`; провайдер и URL берутся из
+  `src/content/settings/salon.json` (override через `.env`).
 
-Booking CTAs point to `/termin/`, which reads provider settings from `src/content/settings/salon.json`
-and can be overridden with `.env` values. See `docs/cms-and-booking.md` and `docs/netlify-deploy.md`.
+---
+
+## ⚖️ Правовая пометка
+
+Проект **не копирует** реальный бренд, тексты и медиа. Impressum / Datenschutz / AGB —
+заглушки для учебной цели. Перед любым реальным запуском в Германии они обязаны быть
+заменены на релевантные для конкретного бизнеса и согласованы с владельцем.
