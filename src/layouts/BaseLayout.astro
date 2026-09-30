@@ -1,10 +1,7 @@
 ---
 import "../styles/global.css";
-import {
-  getLocalBusinessSchema,
-  getSalon,
-  navItems,
-} from "../lib/cms";
+import { getLocalBusinessSchema, getSalon } from "../lib/cms";
+import SiteHeader from "../components/SiteHeader.astro";
 
 interface Props {
   title: string;
@@ -39,21 +36,7 @@ const canonicalUrl = new URL(canonical, Astro.site).toString();
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="/" aria-label={`${salon.name} Startseite`}>
-        <span>{salon.name}</span>
-      </a>
-      <nav aria-label="Hauptnavigation">
-        {
-          navItems.map((item) => (
-            <a href={item.href} class:list={{ active: Astro.url.pathname === item.href }}>
-              {item.label}
-            </a>
-          ))
-        }
-      </nav>
-      <a class="btn btn-primary header-cta" href="/termin/">Termin buchen</a>
-    </header>
+    <SiteHeader name={salon.name} />
     <main>
       <slot />
     </main>
@@ -86,45 +69,6 @@ const canonicalUrl = new URL(canonical, Astro.site).toString();
 </html>
 
 <style>
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 30;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 24px;
-    align-items: center;
-    border-bottom: 1px solid var(--dark-line);
-    background: rgba(18, 16, 13, 0.92);
-    padding: 14px 24px;
-    color: var(--ink-on-dark);
-    backdrop-filter: blur(14px);
-  }
-
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    font-weight: 700;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-    color: var(--muted-on-dark);
-    font-size: 0.95rem;
-  }
-
-  nav a {
-    text-decoration: none;
-  }
-
-  nav a:hover,
-  nav a.active {
-    color: var(--ink-on-dark);
-  }
 
   .site-footer {
     border-top: 1px solid var(--dark-line);
@@ -162,24 +106,7 @@ const canonicalUrl = new URL(canonical, Astro.site).toString();
     font-size: 0.85rem;
   }
 
-  @media (max-width: 920px) {
-    .site-header {
-      grid-template-columns: 1fr auto;
-    }
-
-    nav {
-      grid-column: 1 / -1;
-      justify-content: flex-start;
-      overflow-x: auto;
-      padding-bottom: 2px;
-    }
-  }
-
   @media (max-width: 620px) {
-    .header-cta {
-      display: none;
-    }
-
     .footer-grid {
       grid-template-columns: 1fr;
     }
