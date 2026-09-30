@@ -77,6 +77,10 @@ const canonicalUrl = new URL(canonical, Astro.site).toString();
           <p><a href="/impressum/">Impressum</a><br /><a href="/datenschutz/">Datenschutz</a><br /><a href="/agb/">AGB</a></p>
         </div>
       </div>
+      <div class="container footer-credit">
+        <p>Webentwicklung: Yevhenii Riabokon</p>
+        <p>{salon.name} ist ein fiktives Portfolio-Projekt.</p>
+      </div>
     </footer>
   </body>
 </html>
@@ -142,6 +146,20 @@ const canonicalUrl = new URL(canonical, Astro.site).toString();
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr;
     gap: 28px;
+  }
+
+  .footer-credit {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 28px;
+    border-top: 1px solid var(--dark-line);
+    margin-top: 32px;
+    padding-top: 22px;
+  }
+
+  .footer-credit p {
+    font-size: 0.85rem;
   }
 
   @media (max-width: 920px) {

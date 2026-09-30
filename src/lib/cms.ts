@@ -40,6 +40,16 @@ export async function getPriceGroups() {
   }));
 }
 
+export async function getPriceRules() {
+  const [entry] = await getCollection("priceRules");
+
+  if (!entry) {
+    throw new Error("Missing required CMS entry: pricerules/calculator");
+  }
+
+  return entry.data;
+}
+
 export async function getTeamMembers() {
   const entries = await getCollection("team");
   return entries.sort(byOrder).map((entry) => ({
@@ -55,6 +65,16 @@ export async function getGalleryItems() {
     ...entry.data,
   }));
 }
+
+export async function getReviews() {
+  const entries = await getCollection("reviews");
+  return entries.sort(byOrder).map((entry) => ({
+    id: entry.id,
+    ...entry.data,
+  }));
+}
+
+export type Review = Awaited<ReturnType<typeof getReviews>>[number];
 
 export async function getFaqs() {
   const entries = await getCollection("faqs");
