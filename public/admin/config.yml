@@ -14,9 +14,12 @@ locale: de
 # erlauben genau das und weiterhin externe URLs.
 media_folder: public/uploads
 public_folder: /uploads
-media_library:
-  config:
-    max_file_size: 6000000
+
+# KEIN globales media_library. Dieses Feld waehlt das Backend der Mediathek
+# (default, cloudinary, uploadcare) und verlangt darum ein "name". Ohne das
+# bricht der Editor mit "must have required property 'name'". Die
+# Standard-Mediathek muss nicht angegeben werden. max_file_size gehoert
+# an jedes Bildfeld einzeln, weiter unten.
 
 publish_mode: editorial_workflow
 editor:
@@ -96,11 +99,17 @@ collections:
         widget: image
         required: false
         choose_url: true
+        media_library: { config: { max_file_size: 6000000 } }
       - label: Galeriebilder
         name: galleryImages
         widget: list
         required: false
-        field: { label: Bild, name: url, widget: image, choose_url: true }
+        field:
+          label: Bild
+          name: url
+          widget: image
+          choose_url: true
+          media_library: { config: { max_file_size: 6000000 } }
       - { label: Text auf dem Terminbutton, name: bookingCtaLabel, widget: string, default: "Termin buchen" }
       - { label: SEO-Titel, name: seoTitle, widget: string }
       - { label: SEO-Beschreibung, name: seoDescription, widget: text }
@@ -226,6 +235,7 @@ collections:
         widget: image
         required: false
         choose_url: true
+        media_library: { config: { max_file_size: 6000000 } }
 
   - name: gallery
     label: Galerie
@@ -243,6 +253,7 @@ collections:
         name: image
         widget: image
         choose_url: true
+        media_library: { config: { max_file_size: 6000000 } }
       - { label: Bildbeschreibung, name: alt, widget: text, hint: "Beschreibt das Bild fuer Screenreader und SEO. Pflicht fuer Barrierefreiheit." }
       - label: Zugehoerige Leistung
         name: relatedServiceSlug

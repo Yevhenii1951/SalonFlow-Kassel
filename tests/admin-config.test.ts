@@ -11,6 +11,7 @@ type Field = {
   widget?: string;
   required?: boolean;
   value_type?: string;
+  media_library?: { config?: { max_file_size?: number } };
   fields?: Field[];
   field?: Field;
 };
@@ -23,7 +24,10 @@ type Collection = {
   fields?: Field[];
 };
 
-type Config = { collections: Collection[] };
+type Config = {
+  collections: Collection[];
+  media_library?: { name?: string };
+};
 
 async function loadConfig(): Promise<Config> {
   return parse(await readFile(CONFIG_PATH, "utf8")) as Config;
@@ -190,5 +194,60 @@ describe("Decap-Konfiguration", () => {
     }
 
     expect(asString, "Bildfelder als string zwingen zum manuellen URL-Eintragen").toEqual([]);
+  });
+
+  /**
+   * Produktionsbug vom 2026-09-30: ein globales
+   *
+   *   media_library:
+   *     config:
+   *       max_file_size: 6000000
+   *
+   * laesst den Editor mit "Config Errors: 'media_library' must have
+   * required property 'name'" abbrechen, die Redaktionsseite ist tot.
+   * media_library waehlt das Backend der Mediathek (default,
+   * cloudinary, uploadcare) und verlangt darum ein name. Die
+   * Standard-Mediathek wird gar nicht angegeben.
+   */
+  it("gibt media_library nicht global ohne name an", async () => {
+    const config = await loadConfig();
+    const media = config.media_library;
+
+    if (media !== undefined) {
+      expect(
+        media.name,
+        "globales media_library waehlt ein Mediathek-Backend und braucht ein name",
+      ).toBeTruthy();
+    }
+  });
+
+  /**
+   * Die 6-MB-Grenze gehoert an jedes Bildfeld einzeln, nicht an eine
+   * globale media_library. Sonst gilt sie fuer gar nichts, ohne dass
+   * Decap sich beschwert.
+   */
+  it("begrenzt jedes Bildfeld auf 6 MB", async () => {
+    const config = await loadConfig();
+    const unlimited: string[] = [];
+
+    const walk = (fields: Field[], prefix = "", collection = "") => {
+      for (const field of fields) {
+        if (!field.name) continue;
+        const path = prefix ? `${prefix}.${field.name}` : field.name;
+        if (field.widget === "image" && field.media_library?.config?.max_file_size !== 6000000) {
+          unlimited.push(`${collection}: ${path}`);
+        }
+        if (field.fields) walk(field.fields, path, collection);
+        if (field.field) walk([field.field], path, collection);
+      }
+    };
+
+    for (const collection of config.collections) {
+      walk(fieldsOf(collection), "", collection.label);
+    }
+
+    expect(unlimited, "ohne max_file_size am Feld ist das Upload-Limit wirkungslos").toEqual(
+      [],
+    );
   });
 });
