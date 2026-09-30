@@ -2,7 +2,13 @@ import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
-const imageUrl = z.url();
+const imageUrl = z
+  .string()
+  .min(1)
+  .refine((value) => value.startsWith("/") || /^https?:\/\//i.test(value), {
+    message:
+      "Muss eine Bild-URL (https://...) oder ein Pfad aus /uploads/ sein.",
+  });
 
 const settings = defineCollection({
   loader: glob({ pattern: "**/*.json", base: "./src/content/settings" }),
