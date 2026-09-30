@@ -1,0 +1,106 @@
+---
+import { navItems } from "../lib/cms";
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+const current = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label={`${name} Startseite`}>
+    <span>{name}</span>
+  </a>
+  <nav aria-label="Hauptnavigation">
+    {
+      navItems.map((item) => (
+        <a href={item.href} class:list={{ active: current === item.href }}>
+          {item.label}
+        </a>
+      ))
+    }
+  </nav>
+  <a class="btn btn-primary header-cta" href="/termin/">Termin buchen</a>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: center;
+    border-bottom: 1px solid var(--dark-line);
+    background: rgba(18, 16, 13, 0.92);
+    padding: 14px 24px;
+    color: var(--ink-on-dark);
+    backdrop-filter: blur(14px);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    color: var(--muted-on-dark);
+    font-size: 0.95rem;
+  }
+
+  nav a {
+    text-decoration: none;
+  }
+
+  nav a:hover,
+  nav a.active {
+    color: var(--ink-on-dark);
+  }
+
+  @media (max-width: 920px) {
+    .site-header {
+      grid-template-columns: 1fr auto;
+    }
+
+    .brand {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .header-cta {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    nav {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      justify-content: flex-start;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    nav {
+      flex-wrap: wrap;
+      row-gap: 10px;
+      overflow-x: visible;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .header-cta {
+      display: none;
+    }
+  }
+</style>
