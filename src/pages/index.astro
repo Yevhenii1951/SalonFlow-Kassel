@@ -2,36 +2,24 @@
 import BookingBand from "../components/BookingBand.astro";
 import GalleryGrid from "../components/GalleryGrid.astro";
 import Hero from "../components/Hero.astro";
+import ReviewGrid from "../components/ReviewGrid.astro";
 import ServiceGrid from "../components/ServiceGrid.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getBookingIntegration, getGalleryItems, getSalon, getServices } from "../lib/cms";
+import {
+  getBookingIntegration,
+  getGalleryItems,
+  getReviews,
+  getSalon,
+  getServices,
+} from "../lib/cms";
 
-const [salon, services, gallery] = await Promise.all([
+const [salon, services, gallery, reviews] = await Promise.all([
   getSalon(),
   getServices(),
   getGalleryItems(),
+  getReviews(),
 ]);
 const booking = getBookingIntegration(salon);
-const testimonials = [
-  {
-    text: "Sehr klare Beratung und ein Ergebnis, das auch nach Wochen noch gut aussieht.",
-    name: "Sofie",
-    rating: 5,
-    date: "14.05.",
-  },
-  {
-    text: "Online-Termin war schnell erledigt, Preise waren vorher verständlich.",
-    name: "Jonas",
-    rating: 5,
-    date: "02.06.",
-  },
-  {
-    text: "Ruhiger Salon, gute Empfehlungen und keine Hektik beim ersten Besuch.",
-    name: "Meike",
-    rating: 4,
-    date: "21.06.",
-  },
-];
 ---
 
 <BaseLayout
@@ -112,27 +100,7 @@ const testimonials = [
     </div>
   </section>
 
-  <section class="section testimonial-section">
-    <div class="container">
-      <p class="eyebrow">Vertrauen</p>
-      <h2 class="h2">Kurze Signale statt leerer Werbetexte.</h2>
-      <div class="grid-3 testimonial-grid">
-        {testimonials.map((item) => (
-          <blockquote class="card">
-            <div class="stars" aria-label={`${item.rating} von 5 Sternen`}>
-              {"★".repeat(item.rating)}
-              <span>{"★".repeat(5 - item.rating)}</span>
-            </div>
-            <p>"{item.text}"</p>
-            <footer>
-              <strong>{item.name}</strong>
-              <span>{item.date}</span>
-            </footer>
-          </blockquote>
-        ))}
-      </div>
-    </div>
-  </section>
+  <ReviewGrid reviews={reviews} />
 
   <BookingBand
     salon={salon}
@@ -211,52 +179,8 @@ const testimonials = [
     color: var(--muted);
   }
 
-  .proof-list span,
-  blockquote {
+  .proof-list span {
     color: var(--muted);
-  }
-
-  .testimonial-section {
-    background: #fff;
-  }
-
-  .testimonial-grid {
-    margin-top: 28px;
-  }
-
-  blockquote {
-    margin: 0;
-    padding: 24px;
-    line-height: 1.6;
-  }
-
-  .stars {
-    margin-bottom: 12px;
-    font-size: 1.05rem;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-  }
-
-  .stars span {
-    color: var(--line);
-  }
-
-  blockquote p {
-    margin: 0 0 16px;
-    font-size: 1.08rem;
-    line-height: 1.55;
-  }
-
-  blockquote footer {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    color: var(--muted);
-    font-size: 0.88rem;
-  }
-
-  blockquote footer strong {
-    color: var(--ink);
   }
 
   @media (max-width: 860px) {

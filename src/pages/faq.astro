@@ -2,6 +2,7 @@
 import BookingBand from "../components/BookingBand.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getBookingIntegration, getFaqs, getSalon } from "../lib/cms";
+import "../styles/faq.css";
 
 const [salon, faqs] = await Promise.all([getSalon(), getFaqs()]);
 const booking = getBookingIntegration(salon);
@@ -15,18 +16,31 @@ const booking = getBookingIntegration(salon);
     <div class="container">
       <p class="eyebrow">FAQ</p>
       <h1 class="h1">Fragen, die vor der Buchung entscheiden.</h1>
+      <p class="lead">
+        Was Besucher am häufigsten wissen wollen, bevor sie einen Termin buchen.
+      </p>
     </div>
   </section>
   <section class="section">
     <div class="container faq-list">
       {
-        faqs.map((faq) => (
-          <article class="card faq-item">
-            <h2 class="h3">{faq.question}</h2>
-            <p>{faq.answer}</p>
-          </article>
+        faqs.map((faq, index) => (
+          <details class="faq-item" open={index === 0}>
+            <summary>
+              <span class="faq-question">{faq.question}</span>
+              <span class="faq-category">{faq.category}</span>
+              <span class="faq-icon" aria-hidden="true" />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
         ))
       }
+      <p class="hint">
+        Deine Frage ist nicht dabei? Ruf an oder schreib uns – wir antworten auch
+        ohne Termin.
+      </p>
     </div>
   </section>
   <BookingBand salon={salon} booking={booking} />
@@ -48,15 +62,14 @@ const booking = getBookingIntegration(salon);
 
   .faq-list {
     display: grid;
-    gap: 16px;
+    gap: 12px;
+    max-width: 820px;
   }
 
-  .faq-item {
-    padding: 24px;
-  }
-
-  p {
+  .hint {
     color: var(--muted);
+    font-size: 0.95rem;
     line-height: 1.6;
+    margin: 8px 0 0;
   }
 </style>

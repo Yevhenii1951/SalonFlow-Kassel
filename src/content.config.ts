@@ -73,6 +73,49 @@ const prices = defineCollection({
   }),
 });
 
+const priceRules = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/content/pricerules" }),
+  schema: z.object({
+    order: z.number(),
+    lengths: z.array(
+      z.object({
+        id: z.string(),
+        label: z.string(),
+        note: z.string(),
+      }),
+    ),
+    services: z.array(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        hint: z.string(),
+        price: z.record(z.string(), z.number()),
+        minutes: z.record(z.string(), z.number()),
+      }),
+    ),
+    extras: z.array(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        price: z.number(),
+        minutes: z.number(),
+      }),
+    ),
+  }),
+});
+
+const reviews = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/content/reviews" }),
+  schema: z.object({
+    order: z.number(),
+    author: z.string(),
+    quote: z.string(),
+    service: z.string(),
+    meta: z.string(),
+    rating: z.number().int().min(1).max(5),
+  }),
+});
+
 const team = defineCollection({
   loader: glob({ pattern: "**/*.json", base: "./src/content/team" }),
   schema: z.object({
@@ -112,6 +155,8 @@ export const collections = {
   settings,
   services,
   prices,
+  priceRules,
+  reviews,
   team,
   gallery,
   faqs,

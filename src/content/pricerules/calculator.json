@@ -1,0 +1,59 @@
+{
+  "order": 1,
+  "lengths": [
+    { "id": "kurz", "label": "Kurz", "note": "bis zur Schulter" },
+    { "id": "schulterlang", "label": "Schulterlang", "note": "über die Schulter" },
+    { "id": "lang", "label": "Lang", "note": "unterhalb der Brust" }
+  ],
+  "services": [
+    {
+      "id": "damenhaarschnitt",
+      "name": "Damenhaarschnitt",
+      "hint": "Waschen, Schnitt und Styling",
+      "price": { "kurz": 48, "schulterlang": 58, "lang": 68 },
+      "minutes": { "kurz": 45, "schulterlang": 60, "lang": 75 }
+    },
+    {
+      "id": "herrenhaarschnitt",
+      "name": "Herrenhaarschnitt",
+      "hint": "Beratung, Schnitt und Finish",
+      "price": { "kurz": 36, "schulterlang": 40, "lang": 46 },
+      "minutes": { "kurz": 40, "schulterlang": 45, "lang": 50 }
+    },
+    {
+      "id": "ansatzfarbe",
+      "name": "Ansatzfarbe",
+      "hint": "Färbung ohne Verblondierung",
+      "price": { "kurz": 54, "schulterlang": 64, "lang": 74 },
+      "minutes": { "kurz": 75, "schulterlang": 90, "lang": 105 }
+    },
+    {
+      "id": "balayage",
+      "name": "Balayage inkl. Beratung",
+      "hint": "Freihand-Technik mit Ansatz",
+      "price": { "kurz": 139, "schulterlang": 159, "lang": 185 },
+      "minutes": { "kurz": 150, "schulterlang": 180, "lang": 210 }
+    },
+    {
+      "id": "glossing",
+      "name": "Glossing",
+      "hint": "Glanz und Tonauffrischung",
+      "price": { "kurz": 44, "schulterlang": 50, "lang": 58 },
+      "minutes": { "kurz": 60, "schulterlang": 70, "lang": 80 }
+    },
+    {
+      "id": "pflege",
+      "name": "Pflege & Kurbehandlung",
+      "hint": "Kopfhaut und Haarlänge",
+      "price": { "kurz": 29, "schulterlang": 34, "lang": 39 },
+      "minutes": { "kurz": 30, "schulterlang": 35, "lang": 40 }
+    }
+  ],
+  "extras": [
+    { "id": "ansatz", "name": "Ansatz auffrischen", "price": 12, "minutes": 10 },
+    { "id": "straehnen", "name": "Strähnen im Ansatz", "price": 18, "minutes": 15 },
+    { "id": "wellen", "name": "Wellen oder Glätten", "price": 15, "minutes": 15 },
+    { "id": "pflegekur", "name": "Pflegekur unter der Farbe", "price": 15, "minutes": 10 },
+    { "id": "massage", "name": "Kopfmassage", "price": 9, "minutes": 10 }
+  ]
+}

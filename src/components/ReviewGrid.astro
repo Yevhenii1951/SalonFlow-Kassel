@@ -1,0 +1,113 @@
+---
+import type { Review } from "../lib/cms";
+
+interface Props {
+  reviews: Review[];
+}
+
+const { reviews } = Astro.props;
+---
+
+<section class="section review-section">
+  <div class="container">
+    <div class="review-head">
+      <div>
+        <p class="eyebrow">Kundenstimmen</p>
+        <h2 class="h2">Was Kundinnen und Kunden berichten.</h2>
+      </div>
+      <p class="lead">
+        Zu jeder Bewertung steht, was gemacht wurde und in welchem Abstand. Das
+        sagt mehr als ein Kompliment.
+      </p>
+    </div>
+    <div class="grid-3 review-grid">
+      {
+        reviews.map((review) => (
+          <blockquote class="card review-card">
+            <div class="stars" aria-label={`${review.rating} von 5 Sternen`}>
+              {"★".repeat(review.rating)}
+              <span>{"★".repeat(5 - review.rating)}</span>
+            </div>
+            <p>{review.quote}</p>
+            <footer>
+              <strong>{review.author}</strong>
+              <span>{review.service} · {review.meta}</span>
+            </footer>
+          </blockquote>
+        ))
+      }
+    </div>
+    <p class="review-note">
+      Diese Bewertungen sind für ein fiktives Portfolio-Projekt erfunden. In einem
+      echten Salon stammen sie aus echten Kundenfeedbacks.
+    </p>
+  </div>
+</section>
+
+<style>
+  .review-section {
+    background: #fff;
+  }
+
+  .review-head {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  .review-grid {
+    margin-top: 28px;
+  }
+
+  .review-card {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    margin: 0;
+    padding: 24px;
+  }
+
+  .review-card p {
+    margin: 0 0 20px;
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+
+  .stars {
+    margin-bottom: 14px;
+    font-size: 1.05rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+  }
+
+  .stars span {
+    color: var(--line);
+  }
+
+  .review-card footer {
+    display: grid;
+    gap: 4px;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .review-card footer strong {
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+
+  .review-note {
+    margin: 24px 0 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 860px) {
+    .review-head {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

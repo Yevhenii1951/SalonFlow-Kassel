@@ -1,10 +1,20 @@
 ---
 import BookingBand from "../components/BookingBand.astro";
+import PriceCalculator from "../components/PriceCalculator.astro";
 import PriceList from "../components/PriceList.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getBookingIntegration, getPriceGroups, getSalon } from "../lib/cms";
+import {
+  getBookingIntegration,
+  getPriceGroups,
+  getPriceRules,
+  getSalon,
+} from "../lib/cms";
 
-const [salon, priceGroups] = await Promise.all([getSalon(), getPriceGroups()]);
+const [salon, priceGroups, priceRules] = await Promise.all([
+  getSalon(),
+  getPriceGroups(),
+  getPriceRules(),
+]);
 const booking = getBookingIntegration(salon);
 ---
 
@@ -13,7 +23,7 @@ const booking = getBookingIntegration(salon);
   description="Preisübersicht für den fiktiven SalonFlow Kassel mit Schnitt, Farbe, Balayage und Event-Styling."
 >
   <section class="section page-hero">
-    <div class="container narrow">
+    <div class="container">
       <p class="eyebrow">Preise</p>
       <h1 class="h1">Transparente Orientierung vor dem Termin.</h1>
       <p class="lead">
@@ -24,6 +34,29 @@ const booking = getBookingIntegration(salon);
   </section>
   <section class="section">
     <div class="container">
+      <p class="eyebrow">Preisrechner</p>
+      <h2 class="h2">Was es dich ungefähr kostet.</h2>
+      <p class="lead">
+        Wähle Leistung, Haarlänge und Extras. Der Rechner zeigt dir sofort einen
+        Richtpreis, damit du vor dem Termin weißt, in welcher Größenordnung du
+        dich bewegst.
+      </p>
+    </div>
+  </section>
+  <section class="section section-calc">
+    <div class="container">
+      <PriceCalculator rules={priceRules} bookingUrl="/termin/" />
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="list-head">
+        <h2 class="h2">Alle Preise im Überblick</h2>
+        <p class="lead">
+          Die vollständige Liste ohne Rechner. Preise verstehen sich als
+          Richtwerte ab dem genannten Betrag.
+        </p>
+      </div>
       <PriceList priceGroups={priceGroups} />
       <p class="hint">
         Alle Preise sind Platzhalter für ein Portfolio-Projekt. Rechtssichere
@@ -46,6 +79,16 @@ const booking = getBookingIntegration(salon);
 
   .page-hero .lead {
     color: var(--muted-on-dark);
+  }
+
+  .section-calc {
+    padding-top: 0;
+  }
+
+  .list-head {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 32px;
   }
 
   .hint {

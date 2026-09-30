@@ -1,0 +1,106 @@
+---
+import type { PriceRules } from "../lib/price-calculator";
+import "../styles/price-calculator.css";
+
+interface Props {
+  rules: PriceRules;
+  bookingUrl: string;
+}
+
+const { rules, bookingUrl } = Astro.props;
+const cheapest = (service: PriceRules["services"][number]) => Math.min(...Object.values(service.price));
+---
+
+<div class="calc" data-calc>
+  <script is:inline type="application/json" set:html={JSON.stringify(rules)} />
+
+  <form class="calc-form">
+    <fieldset>
+      <legend><span class="step">1</span> Welche Leistung?</legend>
+      {
+        rules.services.map((service, index) => (
+          <label class="opt">
+            <input
+              type="radio"
+              name="serviceId"
+              value={service.id}
+              checked={index === 0}
+            />
+            <span class="opt-body">
+              <strong>{service.name}</strong>
+              <em>{service.hint}</em>
+            </span>
+            <span class="opt-price">ab {cheapest(service)} EUR</span>
+          </label>
+        ))
+      }
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="step">2</span> Wie lang sind die Haare?</legend>
+      <div class="opt-row">
+        {
+          rules.lengths.map((length, index) => (
+            <label class="opt opt--inline">
+              <input
+                type="radio"
+                name="lengthId"
+                value={length.id}
+                checked={index === 0}
+              />
+              <span class="opt-body">
+                <strong>{length.label}</strong>
+                <em>{length.note}</em>
+              </span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="step">3</span> Was kommt dazu?</legend>
+      <div class="opt-row">
+        {
+          rules.extras.map((extra) => (
+            <label class="opt opt--inline">
+              <input type="checkbox" name="extraIds" value={extra.id} />
+              <span class="opt-body">
+                <strong>{extra.name}</strong>
+                <em>+ {extra.price} EUR</em>
+              </span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <noscript>
+      <p class="calc-hint">
+        Für die Berechnung wird JavaScript benötigt. Die vollständige Preisübersicht
+        findest du direkt darunter.
+      </p>
+    </noscript>
+  </form>
+
+  <aside class="calc-result" data-result hidden aria-live="polite">
+    <p class="eyebrow">Deine Schätzung</p>
+    <p class="calc-total" data-total>–</p>
+    <p class="calc-duration">
+      Dauer: <span data-duration>–</span>
+    </p>
+    <p class="calc-base" data-base></p>
+    <ul class="calc-extras" data-extras></ul>
+    <a class="btn btn-primary calc-cta" href={bookingUrl}>Termin mit dieser Leistung</a>
+    <p class="calc-hint">
+      Richtpreis auf Basis von Länge und Aufwand. Den Endpreis stimmen wir in der
+      Beratung ab, bevor wir anfangen.
+    </p>
+  </aside>
+</div>
+
+<script>
+  import { initPriceCalculator } from "../scripts/price-calculator";
+
+  document.querySelectorAll<HTMLElement>("[data-calc]").forEach(initPriceCalculator);
+</script>
