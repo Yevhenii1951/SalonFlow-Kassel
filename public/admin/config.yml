@@ -1,15 +1,26 @@
-# Decap CMS backed by Netlify Identity + Git Gateway.
-# On Netlify, /admin/ opens the CMS and editors authenticate via Netlify Identity
-# (invites managed in Netlify dashboard). Git Gateway commits changes to GitHub.
+# Decap CMS, abgesichert ueber Netlify Identity + Git Gateway.
+# /admin/ oeffnet das CMS, Redakteur:innen melden sich mit einer
+# Einladung aus dem Netlify-Dashboard an. Git Gateway committet nach
+# GitHub, Netlify baut neu, die Aenderung ist nach dem Merge live.
 backend:
   name: git-gateway
   branch: main
 
+site_url: https://clinquant-jalebi-8c402e.netlify.app
+locale: de
+
+# Uploads landen in public/uploads/ und werden mit committed. Das Feld
+# speichert dann "/uploads/datei.jpg" - die Bildfelder in content.config.ts
+# erlauben genau das und weiterhin externe URLs.
 media_folder: public/uploads
 public_folder: /uploads
+media_library:
+  config:
+    max_file_size: 6000000
+
 publish_mode: editorial_workflow
 editor:
-  preview: false
+  preview: true
 
 collections:
   - name: settings
@@ -23,15 +34,18 @@ collections:
           - { label: Name, name: name, widget: string }
           - { label: Stadt, name: city, widget: string }
           - { label: Claim, name: tagline, widget: string }
-          - { label: Telefon, name: phone, widget: string }
+          - label: Telefon
+            name: phone
+            widget: string
+            pattern: ['^[0-9 +/()-]+$', "Nur Ziffern und + / ( ) - , damit die Vorwahl 0561 erhalten bleibt"]
           - { label: E-Mail, name: email, widget: string }
-          - label: Booking
+          - label: Terminbuchung
             name: booking
             widget: object
             fields:
               - { label: Anbieter, name: provider, widget: string, hint: "z.B. StudioBookr, Treatwell, Shore" }
               - { label: Buchungslink, name: url, widget: string }
-              - { label: Embed URL, name: embedUrl, widget: string, required: false }
+              - { label: Einbettungs-URL, name: embedUrl, widget: string, required: false }
               - { label: Modus, name: mode, widget: select, options: [link, embed], default: link }
           - label: Adresse
             name: address
@@ -40,12 +54,21 @@ collections:
               - { label: Strasse, name: street, widget: string }
               - { label: PLZ, name: postalCode, widget: string }
               - { label: Stadt, name: city, widget: string }
+          - label: Karte
+            name: coordinates
+            widget: object
+            required: false
+            hint: "Wird fuer die OpenStreetMap-Karte auf der Kontaktseite gebraucht. Leer lassen entfernt die Karte."
+            fields:
+              - { label: Breite, name: lat, widget: number, value_type: float }
+              - { label: Laenge, name: lon, widget: number, value_type: float }
           - label: Oeffnungszeiten
             name: hours
             widget: list
+            summary: "{{fields.day}}: {{fields.time}}"
             fields:
               - { label: Tag, name: day, widget: string }
-              - { label: Zeit, name: time, widget: string }
+              - { label: Zeit, name: time, widget: string, hint: "z.B. 09:00-18:00 oder Ruhetag" }
 
   - name: services
     label: Leistungen
@@ -58,21 +81,63 @@ collections:
     fields:
       - { label: Reihenfolge, name: order, widget: number, value_type: int }
       - { label: Titel, name: title, widget: string }
-      - { label: Slug, name: slug, widget: string }
+      - label: Slug
+        name: slug
+        widget: string
+        hint: "Ohne Umlaute, ohne Bindestriche, z.B. damenhaarschnitt"
       - { label: Kurztext, name: summary, widget: text }
       - { label: Langtext, name: longDescription, widget: text }
-      - { label: Preis, name: price, widget: string }
-      - { label: Dauer, name: duration, widget: string }
+      - { label: Preisangabe, name: price, widget: string, hint: "Freitext mit 'ab', z.B. 'ab 48 EUR'" }
+      - { label: Dauerangabe, name: duration, widget: string, hint: "z.B. 'ca. 45 Min.'" }
       - { label: Kategorie, name: category, widget: string }
-      - { label: Featured, name: featured, widget: boolean, default: false }
-      - { label: Hero Image, name: heroImage, widget: string, required: false }
-      - { label: Gallery Images, name: galleryImages, widget: list, field: { label: URL, name: url, widget: string }, required: false }
-      - { label: CTA Label, name: bookingCtaLabel, widget: string, default: "Termin buchen" }
-      - { label: SEO Title, name: seoTitle, widget: string }
-      - { label: SEO Description, name: seoDescription, widget: text }
+      - { label: Auf der Startseite, name: featured, widget: boolean, default: false }
+      - label: Titelbild
+        name: heroImage
+        widget: image
+        required: false
+        choose_url: true
+      - label: Galeriebilder
+        name: galleryImages
+        widget: list
+        required: false
+        field: { label: Bild, name: url, widget: image, choose_url: true }
+      - { label: Text auf dem Terminbutton, name: bookingCtaLabel, widget: string, default: "Termin buchen" }
+      - { label: SEO-Titel, name: seoTitle, widget: string }
+      - { label: SEO-Beschreibung, name: seoDescription, widget: text }
+
+  - name: reviews
+    label: Bewertungen
+    folder: src/content/reviews
+    create: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    identifier_field: author
+    fields:
+      - { label: Reihenfolge, name: order, widget: number, value_type: int }
+      - { label: Name, name: author, widget: string }
+      - label: Bewertung
+        name: rating
+        widget: number
+        value_type: int
+        min: 1
+        max: 5
+        default: 5
+      - label: Leistung
+        name: service
+        widget: string
+        hint: "Welche Leistung wurde genommen, z.B. 'Balayage'"
+      - label: Rhythmus
+        name: meta
+        widget: string
+        hint: "Wie regelmaessig, z.B. 'alle 10 Wochen'. Steht als zweite Zeile unter dem Namen."
+      - label: Zitat
+        name: quote
+        widget: text
+        hint: "Konkret und sachlich. Eine konkrete Angabe wirkt staerker als ein Kompliment."
 
   - name: prices
-    label: Preise
+    label: Preisliste
     folder: src/content/prices
     create: true
     extension: json
@@ -85,10 +150,61 @@ collections:
       - label: Positionen
         name: items
         widget: list
+        summary: "{{fields.label}} - {{fields.price}}"
         fields:
           - { label: Leistung, name: label, widget: string }
           - { label: Preis, name: price, widget: string }
           - { label: Hinweis, name: note, widget: string, required: false }
+
+  - name: calculator
+    label: Preise im Rechner
+    files:
+      - name: rules
+        label: Regeln
+        file: src/content/pricerules/calculator.json
+        format: json
+        fields:
+          - { label: Reihenfolge, name: order, widget: number, value_type: int }
+          - label: Laengen
+            name: lengths
+            widget: list
+            summary: "{{fields.label}} ({{fields.id}})"
+            hint: "Die ID verknuepft Laenge und Preis. Eine neue Laenge braucht unten bei jeder Leistung einen Preis, sonst blendet sich der Rechner aus. Der Test 'content-invariants' faengt das beim Build ab."
+            fields:
+              - { label: ID, name: id, widget: string, hint: "z.B. kurz, schulterlang, lang" }
+              - { label: Bezeichnung, name: label, widget: string }
+              - { label: Zusaetze, name: note, widget: string }
+          - label: Leistungen
+            name: services
+            widget: list
+            summary: "{{fields.name}} - {{fields.price.kurz}} EUR"
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: Name, name: name, widget: string }
+              - { label: Hinweis, name: hint, widget: string, required: false }
+              - label: Preise in EUR
+                name: price
+                widget: object
+                fields:
+                  - { label: Kurz, name: kurz, widget: number, value_type: float }
+                  - { label: Schulterlang, name: schulterlang, widget: number, value_type: float }
+                  - { label: Lang, name: lang, widget: number, value_type: float }
+              - label: Dauer in Minuten
+                name: minutes
+                widget: object
+                fields:
+                  - { label: Kurz, name: kurz, widget: number, value_type: int }
+                  - { label: Schulterlang, name: schulterlang, widget: number, value_type: int }
+                  - { label: Lang, name: lang, widget: number, value_type: int }
+          - label: Zusatzleistungen
+            name: extras
+            widget: list
+            summary: "{{fields.name}} - {{fields.price}} EUR"
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: Name, name: name, widget: string }
+              - { label: Preis in EUR, name: price, widget: number, value_type: float }
+              - { label: Dauer in Minuten, name: minutes, widget: number, value_type: int }
 
   - name: team
     label: Team
@@ -102,9 +218,14 @@ collections:
       - { label: Reihenfolge, name: order, widget: number, value_type: int }
       - { label: Name, name: name, widget: string }
       - { label: Rolle, name: role, widget: string }
-      - { label: Fokus, name: focus, widget: string }
+      - { label: Schwerpunkt, name: focus, widget: string }
       - { label: Bio, name: bio, widget: text }
-      - { label: Foto, name: photo, widget: string, required: false }
+      - { label: Zitat, name: quote, widget: text, required: false }
+      - label: Foto
+        name: photo
+        widget: image
+        required: false
+        choose_url: true
 
   - name: gallery
     label: Galerie
@@ -118,9 +239,16 @@ collections:
       - { label: Reihenfolge, name: order, widget: number, value_type: int }
       - { label: Titel, name: title, widget: string }
       - { label: Kategorie, name: category, widget: string }
-      - { label: Bild, name: image, widget: string }
-      - { label: Alt Text, name: alt, widget: string }
-      - { label: Related Service Slug, name: relatedServiceSlug, widget: string, required: false }
+      - label: Bild
+        name: image
+        widget: image
+        choose_url: true
+      - { label: Bildbeschreibung, name: alt, widget: text, hint: "Beschreibt das Bild fuer Screenreader und SEO. Pflicht fuer Barrierefreiheit." }
+      - label: Zugehoerige Leistung
+        name: relatedServiceSlug
+        widget: string
+        required: false
+        hint: "Slug aus 'Leistungen', z.B. balayage-kassel"
 
   - name: faqs
     label: FAQ
