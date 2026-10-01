@@ -1,10 +1,32 @@
-# SalonFlow Kassel ✂️
+<div align="center">
+
+# SalonFlow Kassel
+
+**Schnelle, lokale Salon-Website mit Leistungen, Galerie, Kontakt und Buchungs-CTA.**
+
+![Astro](https://img.shields.io/badge/Astro-5-FF5D01?logo=astro)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss)
+![Live Demo](https://img.shields.io/badge/live-demo-2f6f68?logo=netlify)
+
+</div>
+
+---
+
+## Überblick
 
 Realistisches **Portfolio-Projekt einer Website für einen fiktiven Friseursalon in Kassel.**
 Aufgebaut wie ein echtes Kundenprojekt: Online-Termin, Leistungen, Preise, Galerie, Team,
 Kontakt mit Karte, lokales SEO und CMS-ready Content.
 
 > **Live-Demo:** https://clinquant-jalebi-8c402e.netlify.app/
+
+## Der Ablauf
+
+```
+Salon entdecken -> Leistungen und Preise vergleichen -> Galerie ansehen
+       -> Kontakt, Karte oder Termin-CTA öffnen -> passende externe Buchung wählen
+```
 
 > Das ist ein **Lern- und Präsentationsprojekt**, kein echter Salon. Alle Inhalte sind
 > originale Platzhalter. Rechtsseiten (Impressum, Datenschutz, AGB) sind Platzhalter und
